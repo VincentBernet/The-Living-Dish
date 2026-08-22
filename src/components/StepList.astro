@@ -1,0 +1,21 @@
+---
+interface Props {
+	steps: string[];
+	locale: 'fr' | 'en';
+}
+
+const { steps } = Astro.props;
+---
+
+<ol class="space-y-4">
+	{
+		steps.map((step, index) => (
+			<li class="flex gap-4">
+				<span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent text-sm font-bold text-white">
+					{index + 1}
+				</span>
+				<p class="pt-1 text-warm-800 leading-relaxed">{step}</p>
+			</li>
+		))
+	}
+</ol>

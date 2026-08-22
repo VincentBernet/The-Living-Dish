@@ -1,0 +1,30 @@
+---
+import type { Locale } from '../lib/recipes';
+
+interface Props {
+	locale: Locale;
+}
+
+const { locale } = Astro.props;
+
+const labels = {
+	fr: { home: 'Accueil', siteName: 'Blog Cuisine' },
+	en: { home: 'Home', siteName: 'Blog Cuisine' },
+};
+---
+
+<header class="border-b border-warm-200 bg-warm-50">
+	<div class="mx-auto max-w-5xl px-4 py-4 flex items-center justify-between">
+		<a href={`/${locale}/`} class="text-xl font-serif font-bold text-warm-900 hover:text-accent transition-colors">
+			{labels[locale].siteName}
+		</a>
+		<nav>
+			<a
+				href={`/${locale}/`}
+				class="text-sm font-medium text-warm-800 hover:text-accent transition-colors"
+			>
+				{labels[locale].home}
+			</a>
+		</nav>
+	</div>
+</header>
