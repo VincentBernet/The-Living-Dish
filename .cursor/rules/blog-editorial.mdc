@@ -1,0 +1,30 @@
+---
+description: Editorial voice and content philosophy for blog articles
+globs: "src/content/**/*.mdx"
+alwaysApply: false
+---
+
+# Editorial Philosophy
+
+This blog explores **food as cultural storytelling**, not just recipes.
+
+## What each article should deliver
+
+1. Understanding of the dish or ingredient
+2. Understanding of the culture and history around it
+3. A technique, principle, or skill the reader can apply
+
+## Writing approach
+
+- Answer "where does this come from?" and "why is it made this way?" — not only "how do I cook it?"
+- Treat the recipe as the **practical conclusion** of a deeper exploration
+- Favor depth over quantity; every recipe should have something worth understanding behind it
+- Write with curiosity and respect — avoid exoticizing foreign cuisines
+
+## Content beyond recipes
+
+Not every article needs a full recipe. Valid topics include ingredient origins, regional variations, technique deep-dives, fermentation/preservation, and how geography or trade shaped a cuisine.
+
+## Voice
+
+A curious French food enthusiast and traveler sharing what he learns — personal perspective, well-researched, nuanced. See `README.md` for the full editorial vision.

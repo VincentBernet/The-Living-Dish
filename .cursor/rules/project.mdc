@@ -1,0 +1,39 @@
+---
+description: Core project context and development workflow
+alwaysApply: true
+---
+
+# Blog Cuisine — Project Context
+
+Bilingual (fr/en) Astro 7 blog about food as cultural storytelling. Default locale is French.
+
+## Stack
+
+- Astro 7 + Content Collections (glob loader + Zod schema)
+- MDX for recipe articles
+- Tailwind CSS v4 (`@theme` tokens in `src/styles/global.css`)
+- React islands only where client interactivity is needed (e.g. `ServingsScaler`)
+
+## Development
+
+Start the dev server in background mode:
+
+```
+astro dev --background
+```
+
+Manage with `astro dev stop`, `astro dev status`, and `astro dev logs`.
+
+## Conventions
+
+- Keep changes minimal and scoped to the task
+- Prefer Astro components; reach for React only when client state is required
+- Shared logic lives in `src/lib/` (e.g. `recipes.ts` for locale helpers)
+- Consult [Astro docs](https://docs.astro.build) before routing, content, styling, or i18n changes
+
+## Key paths
+
+- Content: `src/content/recipes/{locale}/{slug}.mdx`
+- Pages: `src/pages/{locale}/` (mirrored fr/en structure)
+- Schema: `src/content.config.ts`
+- Layout: `src/layouts/Layout.astro`

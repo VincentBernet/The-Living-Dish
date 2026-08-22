@@ -1,0 +1,36 @@
+---
+description: Bilingual routing and translation linking
+globs: "src/pages/**/*,src/lib/recipes.ts,src/components/LanguageSwitcher.astro"
+alwaysApply: false
+---
+
+# Internationalization
+
+## Routing
+
+Configured in `astro.config.mjs`:
+
+- Locales: `fr` (default), `en`
+- `prefixDefaultLocale: true` → all URLs are `/{locale}/...`
+
+Mirror page structure across locales:
+
+```
+src/pages/fr/index.astro  ↔  src/pages/en/index.astro
+src/pages/fr/recipes/[slug].astro  ↔  src/pages/en/recipes/[slug].astro
+```
+
+## Locale helpers (`src/lib/recipes.ts`)
+
+- `getLocaleFromId(id)` — extract locale from content id (`fr/ratatouille`)
+- `getSlugFromId(id)` — extract slug without locale prefix
+- `getRecipesByLocale(locale)` — filtered, date-sorted collection
+- `getAlternateRecipe(recipe, targetLocale)` — find translation via `translationKey`
+
+## Language switcher
+
+`LanguageSwitcher.astro` links to the alternate locale's recipe using `translationKey` matching. When adding a recipe, always provide both locale files or the switcher won't appear.
+
+## UI copy
+
+Hardcode locale-specific labels in page templates (e.g. difficulty labels, section headings). Keep fr/en page files in sync structurally — only copy and `locale` constant differ.

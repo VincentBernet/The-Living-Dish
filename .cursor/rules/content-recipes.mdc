@@ -1,0 +1,38 @@
+---
+description: Recipe content collections and MDX frontmatter
+globs: "src/content/**/*.{md,mdx},src/content.config.ts"
+alwaysApply: false
+---
+
+# Recipe Content
+
+## File layout
+
+```
+src/content/recipes/{locale}/{slug}.mdx
+```
+
+Locales: `fr` (default), `en`. Each translation pair shares the same `translationKey`.
+
+## Frontmatter schema
+
+Required fields (see `src/content.config.ts`):
+
+- `title`, `description`, `pubDate`, `prepTime`, `cookTime`, `servings`
+- `difficulty`: `easy` | `medium` | `hard`
+- `translationKey`: shared slug-like key linking fr/en versions
+- `ingredients`: array of `{ quantity?, unit?, item }`
+- `steps`: array of strings
+- `tags`: optional string array
+
+## MDX body
+
+- Write cultural/historical narrative in the MDX body (headings, paragraphs)
+- Keep structured data (ingredients, steps, times) in frontmatter — not in prose
+- Ingredients without a fixed quantity omit `quantity` (e.g. "salt and pepper")
+
+## Adding a new recipe
+
+1. Create `{locale}/{slug}.mdx` for each locale with matching `translationKey`
+2. Schema changes go in `src/content.config.ts` only
+3. No page changes needed — `[slug].astro` generates paths from the collection

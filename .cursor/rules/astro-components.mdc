@@ -1,0 +1,43 @@
+---
+description: Astro component and page patterns
+globs: "**/*.astro"
+alwaysApply: false
+---
+
+# Astro Patterns
+
+## Components vs pages
+
+- **`.astro` components** for static UI (Header, RecipeCard, StepList, IngredientList)
+- **`.tsx` islands** only when client interactivity is needed — use `client:load` sparingly
+- Pages live under `src/pages/{locale}/` and use `getStaticPaths()` for dynamic routes
+
+## Component structure
+
+```astro
+---
+interface Props {
+  title: string;
+  locale: Locale;
+}
+const { title, locale } = Astro.props;
+---
+
+<section>...</section>
+```
+
+- Type props with `interface Props`
+- Import `Locale` from `src/lib/recipes.ts` for locale-typed props
+- Pass `locale` to `Layout` so `<html lang>` and nav stay consistent
+
+## Styling
+
+- Use Tailwind utility classes; design tokens are `warm-*`, `cream`, `accent`
+- Prose content uses `.recipe-prose` for MDX body text
+- Do not add global CSS unless extending `@theme` or shared prose styles
+
+## Data fetching
+
+- Fetch content in the frontmatter (--- block), not in the template
+- Use helpers from `src/lib/recipes.ts` instead of duplicating collection queries
+- Redirect or 404 when content is missing — see recipe `[slug].astro` pages
