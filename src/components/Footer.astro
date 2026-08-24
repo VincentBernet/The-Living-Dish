@@ -1,20 +1,20 @@
 ---
-import type { Locale } from '../lib/recipes';
+import type { Locale } from "../lib/recipes";
 
 interface Props {
-	locale: Locale;
+  locale: Locale;
 }
 
 const { locale } = Astro.props;
 
 const labels = {
-	fr: { tagline: 'Recettes et histoire de la cuisine' },
-	en: { tagline: 'Recipes and food history' },
+  fr: { tagline: "Recettes et histoire de la cuisine" },
+  en: { tagline: "Recipes and food history" },
 };
 ---
 
 <footer class="border-t border-warm-200 bg-warm-50 mt-auto">
-	<div class="mx-auto max-w-5xl px-4 py-6 text-center text-sm text-warm-800">
-		<p>{labels[locale].tagline}</p>
-	</div>
+  <div class="mx-auto max-w-5xl px-4 py-6 text-center text-sm text-warm-800">
+    <p>{labels[locale].tagline}</p>
+  </div>
 </footer>

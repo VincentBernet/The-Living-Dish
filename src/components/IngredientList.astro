@@ -1,37 +1,37 @@
 ---
 interface Ingredient {
-	quantity?: number;
-	unit?: string;
-	item: string;
+  quantity?: number;
+  unit?: string;
+  item: string;
 }
 
 interface Props {
-	ingredients: Ingredient[];
-	locale: 'fr' | 'en';
+  ingredients: Ingredient[];
+  locale: "fr" | "en";
 }
 
 const { ingredients, locale } = Astro.props;
 
 function formatIngredient(ingredient: Ingredient): string {
-	const parts: string[] = [];
-	if (ingredient.quantity !== undefined) {
-		parts.push(String(ingredient.quantity));
-	}
-	if (ingredient.unit) {
-		parts.push(ingredient.unit);
-	}
-	parts.push(ingredient.item);
-	return parts.join(' ');
+  const parts: string[] = [];
+  if (ingredient.quantity !== undefined) {
+    parts.push(String(ingredient.quantity));
+  }
+  if (ingredient.unit) {
+    parts.push(ingredient.unit);
+  }
+  parts.push(ingredient.item);
+  return parts.join(" ");
 }
 ---
 
 <ul class="space-y-2">
-	{
-		ingredients.map((ingredient) => (
-			<li class="flex items-start gap-2 text-warm-800">
-				<span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
-				<span>{formatIngredient(ingredient)}</span>
-			</li>
-		))
-	}
+  {
+    ingredients.map((ingredient) => (
+      <li class="flex items-start gap-2 text-warm-800">
+        <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+        <span>{formatIngredient(ingredient)}</span>
+      </li>
+    ))
+  }
 </ul>

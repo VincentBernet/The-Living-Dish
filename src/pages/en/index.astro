@@ -1,24 +1,24 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import RecipeCard from '../../components/RecipeCard.astro';
-import { getRecipesByLocale } from '../../lib/recipes';
+import Layout from "../../layouts/Layout.astro";
+import RecipeCard from "../../components/RecipeCard.astro";
+import { getRecipesByLocale } from "../../lib/recipes";
 
-const locale = 'en';
+const locale = "en";
 const recipes = await getRecipesByLocale(locale);
 ---
 
 <Layout
-	title="Blog Cuisine — Recipes"
-	description="Discover traditional recipes and their history."
-	locale={locale}
+  title="Blog Cuisine — Recipes"
+  description="Discover traditional recipes and their history."
+  locale={locale}
 >
-	<div class="mx-auto max-w-5xl px-4 py-12">
-		<h1 class="text-4xl font-serif font-bold text-warm-900">Recipes</h1>
-		<p class="mt-2 text-lg text-warm-800">
-			Classic dishes, their ingredients, and the stories behind them.
-		</p>
-		<div class="mt-10 grid gap-6 sm:grid-cols-2">
-			{recipes.map((recipe) => <RecipeCard recipe={recipe} locale={locale} />)}
-		</div>
-	</div>
+  <div class="mx-auto max-w-5xl px-4 py-12">
+    <h1 class="text-4xl font-serif font-bold text-warm-900">Recipes</h1>
+    <p class="mt-2 text-lg text-warm-800">
+      Classic dishes, their ingredients, and the stories behind them.
+    </p>
+    <div class="mt-10 grid gap-6 sm:grid-cols-2">
+      {recipes.map((recipe) => <RecipeCard recipe={recipe} locale={locale} />)}
+    </div>
+  </div>
 </Layout>

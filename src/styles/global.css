@@ -1,26 +1,26 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @theme {
-	--font-sans: 'Segoe UI', system-ui, sans-serif;
-	--font-serif: Georgia, 'Times New Roman', serif;
-	--color-cream: #faf7f2;
-	--color-warm-50: #fdf8f3;
-	--color-warm-100: #f5ebe0;
-	--color-warm-200: #e8d5c4;
-	--color-warm-800: #3d2c1e;
-	--color-warm-900: #2a1f15;
-	--color-accent: #c45c26;
-	--color-accent-dark: #a34a1e;
+  --font-sans: "Segoe UI", system-ui, sans-serif;
+  --font-serif: Georgia, "Times New Roman", serif;
+  --color-cream: #faf7f2;
+  --color-warm-50: #fdf8f3;
+  --color-warm-100: #f5ebe0;
+  --color-warm-200: #e8d5c4;
+  --color-warm-800: #3d2c1e;
+  --color-warm-900: #2a1f15;
+  --color-accent: #c45c26;
+  --color-accent-dark: #a34a1e;
 }
 
 body {
-	@apply bg-cream text-warm-900 font-sans antialiased;
+  @apply bg-cream text-warm-900 font-sans antialiased;
 }
 
 .recipe-prose p {
-	@apply text-warm-800 leading-relaxed mb-4;
+  @apply text-warm-800 leading-relaxed mb-4;
 }
 
 .recipe-prose h2 {
-	@apply text-xl font-serif font-bold text-warm-900 mt-8 mb-3;
+  @apply text-xl font-serif font-bold text-warm-900 mt-8 mb-3;
 }

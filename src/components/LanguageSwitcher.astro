@@ -1,30 +1,32 @@
 ---
-import type { Locale } from '../lib/recipes';
-import { getSlugFromId } from '../lib/recipes';
-import type { CollectionEntry } from 'astro:content';
+import type { Locale } from "../lib/recipes";
+import { getSlugFromId } from "../lib/recipes";
+import type { CollectionEntry } from "astro:content";
 
 interface Props {
-	currentLocale: Locale;
-	alternateRecipe?: CollectionEntry<'recipes'>;
+  currentLocale: Locale;
+  alternateRecipe?: CollectionEntry<"recipes">;
 }
 
 const { currentLocale, alternateRecipe } = Astro.props;
 
 if (!alternateRecipe) {
-	return null;
+  return null;
 }
 
-const targetLocale = currentLocale === 'fr' ? 'en' : 'fr';
+const targetLocale = currentLocale === "fr" ? "en" : "fr";
 const slug = getSlugFromId(alternateRecipe.id);
-const label = targetLocale === 'fr' ? 'Français' : 'English';
+const label = targetLocale === "fr" ? "Français" : "English";
 ---
 
 <div class="flex items-center gap-2 text-sm">
-	<span class="text-warm-800">{currentLocale === 'fr' ? 'Langue :' : 'Language:'}</span>
-	<a
-		href={`/${targetLocale}/recipes/${slug}`}
-		class="font-medium text-accent hover:text-accent-dark transition-colors"
-	>
-		{label}
-	</a>
+  <span class="text-warm-800"
+    >{currentLocale === "fr" ? "Langue :" : "Language:"}</span
+  >
+  <a
+    href={`/${targetLocale}/recipes/${slug}`}
+    class="font-medium text-accent hover:text-accent-dark transition-colors"
+  >
+    {label}
+  </a>
 </div>
