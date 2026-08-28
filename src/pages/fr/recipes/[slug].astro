@@ -2,13 +2,8 @@
 import { render } from "astro:content";
 import Layout from "../../../layouts/Layout.astro";
 import StepList from "../../../components/StepList.astro";
-import LanguageSwitcher from "../../../components/LanguageSwitcher.astro";
 import ServingsScaler from "../../../components/ServingsScaler";
-import {
-  getRecipesByLocale,
-  getAlternateRecipe,
-  getSlugFromId,
-} from "../../../lib/recipes";
+import { getRecipesByLocale, getSlugFromId } from "../../../lib/recipes";
 
 const locale = "fr";
 
@@ -28,7 +23,6 @@ if (!recipe) {
 }
 
 const { Content } = await render(recipe);
-const alternateRecipe = await getAlternateRecipe(recipe, "en");
 
 const difficultyLabels = {
   easy: "Facile",
@@ -43,13 +37,6 @@ const difficultyLabels = {
   locale={locale}
 >
   <article class="mx-auto max-w-3xl px-4 py-12">
-    <div class="mb-6">
-      <LanguageSwitcher
-        currentLocale={locale}
-        alternateRecipe={alternateRecipe}
-      />
-    </div>
-
     <header class="mb-10">
       <h1 class="text-4xl font-serif font-bold text-warm-900">
         {recipe.data.title}

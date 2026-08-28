@@ -1,32 +1,57 @@
 ---
 import type { Locale } from "../lib/recipes";
-import { getSlugFromId } from "../lib/recipes";
-import type { CollectionEntry } from "astro:content";
+import { getAlternateRecipe, getRecipe, getSlugFromId } from "../lib/recipes";
 
 interface Props {
   currentLocale: Locale;
-  alternateRecipe?: CollectionEntry<"recipes">;
 }
 
-const { currentLocale, alternateRecipe } = Astro.props;
-
-if (!alternateRecipe) {
-  return null;
-}
-
+const { currentLocale } = Astro.props;
 const targetLocale = currentLocale === "fr" ? "en" : "fr";
-const slug = getSlugFromId(alternateRecipe.id);
-const label = targetLocale === "fr" ? "Français" : "English";
+
+async function getHref(locale: Locale): Promise<string> {
+  const segments = Astro.url.pathname.split("/").filter(Boolean);
+  const rest = segments.slice(1);
+
+  if (rest[0] === "recipes" && rest[1]) {
+    const slug = rest[1];
+    const recipe = await getRecipe(currentLocale, slug);
+    if (recipe) {
+      const alternate = await getAlternateRecipe(recipe, locale);
+      if (alternate) {
+        return `/${locale}/recipes/${getSlugFromId(alternate.id)}`;
+      }
+    }
+    return `/${locale}/`;
+  }
+
+  const path = rest.length ? `/${rest.join("/")}` : "";
+  return `/${locale}${path}`;
+}
+
+const href = await getHref(targetLocale);
 ---
 
-<div class="flex items-center gap-2 text-sm">
-  <span class="text-warm-800"
-    >{currentLocale === "fr" ? "Langue :" : "Language:"}</span
-  >
-  <a
-    href={`/${targetLocale}/recipes/${slug}`}
-    class="font-medium text-accent hover:text-accent-dark transition-colors"
-  >
-    {label}
-  </a>
-</div>
+<nav aria-label={currentLocale === "fr" ? "Langue" : "Language"}>
+  {
+    targetLocale === "fr" ? (
+      <a
+        href={href}
+        class="text-lg leading-none hover:opacity-80 transition-opacity"
+        aria-label="English"
+        title="English"
+      >
+        🇬🇧
+      </a>
+    ) : (
+      <a
+        href={href}
+        class="text-lg leading-none hover:opacity-80 transition-opacity"
+        aria-label="Français"
+        title="Français"
+      >
+        🇫🇷
+      </a>
+    )
+  }
+</nav>

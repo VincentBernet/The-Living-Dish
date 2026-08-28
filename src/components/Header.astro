@@ -1,5 +1,6 @@
 ---
 import type { Locale } from "../lib/recipes";
+import LanguageSwitcher from "./LanguageSwitcher.astro";
 
 interface Props {
   locale: Locale;
@@ -21,13 +22,14 @@ const labels = {
     >
       {labels[locale].siteName}
     </a>
-    <nav>
+    <nav class="flex items-center gap-4">
       <a
         href={`/${locale}/`}
         class="text-sm font-medium text-warm-800 hover:text-accent transition-colors"
       >
         {labels[locale].home}
       </a>
+      <LanguageSwitcher currentLocale={locale} />
     </nav>
   </div>
 </header>
