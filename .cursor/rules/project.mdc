@@ -3,7 +3,7 @@ description: Core project context and development workflow
 alwaysApply: true
 ---
 
-# Blog Cuisine — Project Context
+# The Living Dish — Project Context
 
 Bilingual (fr/en) Astro 7 blog about food as cultural storytelling. Default locale is French.
 
