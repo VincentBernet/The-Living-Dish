@@ -26,7 +26,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm run ci
 
-      - uses: netlify/actions/cli@v5
+      - uses: netlify/actions/cli@3185065f4ab2f6df6f2ef41ee013626e1c02a426
         with:
           args: deploy --prod --dir=dist
         env:
