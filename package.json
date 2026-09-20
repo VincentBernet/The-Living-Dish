@@ -13,9 +13,9 @@
     "astro": "astro",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "format": "prettier --write .",
-    "format:check": "prettier --check .",
-    "ci": "pnpm run lint && pnpm run format:check && pnpm run build",
+    "prettier": "prettier --check .",
+    "prettier:fix": "prettier --write .",
+    "ci": "pnpm run lint && pnpm run prettier && pnpm run build",
     "prepare": "husky"
   },
   "dependencies": {
