@@ -2,6 +2,7 @@
 import type { CollectionEntry } from "astro:content";
 import type { Locale } from "../lib/recipes";
 import { getSlugFromId } from "../lib/recipes";
+import RecipeCardMedia from "./RecipeCardMedia.astro";
 
 interface Props {
   recipe: CollectionEntry<"recipes">;
@@ -21,15 +22,7 @@ const difficultyLabels = {
   href={`/${locale}/recipes/${slug}`}
   class="group block overflow-hidden rounded-lg border border-warm-200 bg-white shadow-sm hover:shadow-md hover:border-accent/30 transition-all"
 >
-  {
-    recipe.data.image && (
-      <img
-        src={recipe.data.image}
-        alt=""
-        class="aspect-[16/9] w-full object-cover"
-      />
-    )
-  }
+  <RecipeCardMedia image={recipe.data.image} />
   <div class="p-6">
     <h2
       class="text-xl font-serif font-bold text-warm-900 group-hover:text-accent transition-colors"
@@ -42,10 +35,10 @@ const difficultyLabels = {
     <div class="mt-4 flex flex-wrap gap-3 text-xs text-warm-800">
       <span>{recipe.data.prepTime + recipe.data.cookTime} min</span>
       <span>&middot;</span>
-      <span
-        >{recipe.data.servings}
-        {locale === "fr" ? "portions" : "servings"}</span
-      >
+      <span>
+        {recipe.data.servings}
+        {locale === "fr" ? "portions" : "servings"}
+      </span>
       <span>&middot;</span>
       <span>{difficultyLabels[locale][recipe.data.difficulty]}</span>
     </div>

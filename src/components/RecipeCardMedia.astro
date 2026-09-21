@@ -1,0 +1,9 @@
+---
+interface Props {
+  image?: string;
+}
+
+const { image } = Astro.props;
+---
+
+{image && <img src={image} alt="" class="aspect-[16/9] w-full object-cover" />}
