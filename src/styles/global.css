@@ -24,3 +24,31 @@ body {
 .recipe-prose h2 {
   @apply text-xl font-serif font-bold text-warm-900 mt-8 mb-3;
 }
+
+.recipe-prose ul {
+  @apply list-disc pl-6 text-warm-800;
+}
+
+.recipe-prose li {
+  @apply mb-2;
+}
+
+.recipe-prose a {
+  @apply text-accent underline underline-offset-2;
+}
+
+.recipe-prose .pickles-table {
+  @apply min-w-[64rem] w-full border-collapse text-left text-sm;
+}
+
+.recipe-prose .pickles-table th {
+  @apply bg-warm-100 px-4 py-3 font-semibold text-warm-900;
+}
+
+.recipe-prose .pickles-table td {
+  @apply border-t border-warm-200 px-4 py-3 align-top leading-relaxed text-warm-800;
+}
+
+.recipe-prose .pickles-table tbody th {
+  @apply border-t border-warm-200 text-left;
+}

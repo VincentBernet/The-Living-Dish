@@ -22,6 +22,15 @@ const recipeSchema = z.object({
     }),
   ),
   steps: z.array(z.string()),
+  sourcesIntro: z.string().optional(),
+  sources: z
+    .array(
+      z.object({
+        title: z.string(),
+        url: z.string().url(),
+      }),
+    )
+    .default([]),
 });
 
 export const collections = {
