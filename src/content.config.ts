@@ -12,6 +12,7 @@ const recipeSchema = z.object({
   difficulty: z.enum(["easy", "medium", "hard"]),
   tags: z.array(z.string()).default([]),
   image: z.string().optional(),
+  ingredientsImage: z.string().optional(),
   translationKey: z.string(),
   ingredients: z.array(
     z.object({

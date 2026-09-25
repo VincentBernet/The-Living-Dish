@@ -60,6 +60,16 @@ const difficultyLabels = {
       )
     }
 
+    {
+      recipe.data.ingredientsImage && (
+        <img
+          src={recipe.data.ingredientsImage}
+          alt={`Ingredients for ${recipe.data.title}`}
+          class="mb-10 aspect-[4/3] w-full rounded-lg object-cover"
+        />
+      )
+    }
+
     <section class="recipe-prose mb-10 max-w-none">
       <Content />
     </section>
