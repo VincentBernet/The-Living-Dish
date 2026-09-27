@@ -1,5 +1,6 @@
 ---
 import { render } from "astro:content";
+import ImageMosaic from "../../../components/ImageMosaic.astro";
 import Layout from "../../../layouts/Layout.astro";
 import StepList from "../../../components/StepList.astro";
 import ServingsScaler from "../../../components/ServingsScaler";
@@ -65,28 +66,17 @@ const difficultyLabels = {
     </section>
 
     <section class="mb-10">
-      <h2 class="mb-4 text-2xl font-serif font-bold text-warm-900">
-        Ingrédients
-      </h2>
       <ServingsScaler
         client:load
         ingredients={recipe.data.ingredients}
         baseServings={recipe.data.servings}
         locale={locale}
+        title="Ingrédients"
+        ingredientsImage={recipe.data.ingredientsImage}
+        imageAlt={`Ingrédients pour ${recipe.data.title}`}
       />
-      <div class="mt-4">
-        {
-          recipe.data.ingredientsImage && (
-            <img
-              src={recipe.data.ingredientsImage}
-              alt={`Ingrédients pour ${recipe.data.title}`}
-              class="mb-10 aspect-[4/3] w-full rounded-lg object-cover"
-            />
-          )
-        }
-      </div>
 
-      <section>
+      <section class="mt-12">
         <h2 class="mb-6 text-2xl font-serif font-bold text-warm-900">Étapes</h2>
         <StepList
           steps={recipe.data.steps}
@@ -94,6 +84,12 @@ const difficultyLabels = {
           locale={locale}
         />
       </section>
+
+      {
+        recipe.data.galleries.map((gallery) => (
+          <ImageMosaic label={gallery.label} images={gallery.images} />
+        ))
+      }
 
       {
         recipe.data.sources.length > 0 && (

@@ -1,0 +1,31 @@
+---
+interface Props {
+  label: string;
+  images: {
+    src: string;
+    alt: string;
+    orientation: "horizontal" | "vertical";
+  }[];
+}
+
+const { label, images } = Astro.props;
+---
+
+<div class="recipe-mosaic mt-6" aria-label={label}>
+  <div class="grid grid-cols-2 gap-3">
+    {
+      images.map((image) => (
+        <img
+          src={image.src}
+          alt={image.alt}
+          class={
+            image.orientation === "horizontal"
+              ? "aspect-[4/3] w-full rounded-lg object-cover"
+              : "aspect-[3/4] w-full rounded-lg object-cover"
+          }
+          loading="lazy"
+        />
+      ))
+    }
+  </div>
+</div>
