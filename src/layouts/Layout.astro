@@ -23,6 +23,13 @@ const { title, description, locale } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
+    {
+      /* Goatcounter, some tracking for analytics : https://vincent-bernet.goatcounter.com/ */
+    }
+    <script
+      data-goatcounter="https://vincent-bernet.goatcounter.com/count"
+      async
+      src="https://gc.zgo.at/count.js"></script>
   </head>
   <body class="min-h-screen flex flex-col">
     <Header locale={locale} />
