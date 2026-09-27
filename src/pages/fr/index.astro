@@ -15,7 +15,8 @@ const recipes = await getRecipesByLocale(locale);
   <div class="mx-auto max-w-5xl px-4 py-12">
     <h1 class="text-4xl font-serif font-bold text-warm-900">Recettes</h1>
     <p class="mt-2 text-lg text-warm-800">
-      Des plats classiques, leurs ingrédients et l'histoire qui les accompagne.
+      Une recette, son histoire, ses origines, ses techniques, une fenêtre sur
+      une culture.
     </p>
     <div class="mt-10 grid gap-6 sm:grid-cols-2">
       {recipes.map((recipe) => <RecipeCard recipe={recipe} locale={locale} />)}
