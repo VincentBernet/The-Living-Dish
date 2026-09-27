@@ -7,10 +7,16 @@ import type { Locale } from "../lib/recipes";
 interface Props {
   title: string;
   description?: string;
+  image?: string;
   locale: Locale;
 }
 
-const { title, description, locale } = Astro.props;
+const { title, description, image, locale } = Astro.props;
+const siteUrl = "https://the-living-dish.netlify.app";
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
+const socialImage = image
+  ? new URL(image, siteUrl).href
+  : `${siteUrl}/images/og-image.png`;
 ---
 
 <!doctype html>
@@ -23,6 +29,17 @@ const { title, description, locale } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
+    <meta property="og:title" content={title} />
+    {description && <meta property="og:description" content={description} />}
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:image:alt" content={title} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    {description && <meta name="twitter:description" content={description} />}
+    <meta name="twitter:image" content={socialImage} />
+    <meta name="twitter:image:alt" content={title} />
     {
       /* Goatcounter, some tracking for analytics : https://vincent-bernet.goatcounter.com/ */
     }
