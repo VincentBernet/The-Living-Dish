@@ -4,4 +4,6 @@ A grandmother changes an ingredient. A region adapts to what grows there. A migr
 
 By understanding a dish and how it evolved, we can understand a part of the culture that created it. **The history of a dish becomes a lens through which we can see a culture.**
 
+Tracking dashboard : https://vincent-bernet.goatcounter.com/
+
 [![Netlify Status](https://api.netlify.com/api/v1/badges/bd3854cb-a227-43fc-9d78-140dbc4f955b/deploy-status)](https://app.netlify.com/projects/the-living-dish/deploys)
