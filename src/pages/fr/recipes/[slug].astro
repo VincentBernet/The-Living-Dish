@@ -60,16 +60,6 @@ const difficultyLabels = {
       )
     }
 
-    {
-      recipe.data.ingredientsImage && (
-        <img
-          src={recipe.data.ingredientsImage}
-          alt={`Ingrédients pour ${recipe.data.title}`}
-          class="mb-10 aspect-[4/3] w-full rounded-lg object-cover"
-        />
-      )
-    }
-
     <section class="recipe-prose mb-10 max-w-none">
       <Content />
     </section>
@@ -84,27 +74,42 @@ const difficultyLabels = {
         baseServings={recipe.data.servings}
         locale={locale}
       />
-    </section>
+      <div class="mt-4">
+        {
+          recipe.data.ingredientsImage && (
+            <img
+              src={recipe.data.ingredientsImage}
+              alt={`Ingrédients pour ${recipe.data.title}`}
+              class="mb-10 aspect-[4/3] w-full rounded-lg object-cover"
+            />
+          )
+        }
+      </div>
 
-    <section>
-      <h2 class="mb-6 text-2xl font-serif font-bold text-warm-900">Étapes</h2>
-      <StepList steps={recipe.data.steps} locale={locale} />
-    </section>
+      <section>
+        <h2 class="mb-6 text-2xl font-serif font-bold text-warm-900">Étapes</h2>
+        <StepList
+          steps={recipe.data.steps}
+          stepImages={recipe.data.stepImages}
+          locale={locale}
+        />
+      </section>
 
-    {
-      recipe.data.sources.length > 0 && (
-        <section class="recipe-prose mt-10 max-w-none">
-          <h2>Inspiration &amp; sources</h2>
-          {recipe.data.sourcesIntro && <p>{recipe.data.sourcesIntro}</p>}
-          <ul>
-            {recipe.data.sources.map((source) => (
-              <li>
-                <a href={source.url}>{source.title}</a>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )
-    }
+      {
+        recipe.data.sources.length > 0 && (
+          <section class="recipe-prose mt-10 max-w-none">
+            <h2>Inspiration &amp; sources</h2>
+            {recipe.data.sourcesIntro && <p>{recipe.data.sourcesIntro}</p>}
+            <ul>
+              {recipe.data.sources.map((source) => (
+                <li>
+                  <a href={source.url}>{source.title}</a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )
+      }
+    </section>
   </article>
 </Layout>

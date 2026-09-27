@@ -22,6 +22,21 @@ const recipeSchema = z.object({
     }),
   ),
   steps: z.array(z.string()),
+  stepImages: z
+    .array(
+      z.object({
+        afterStep: z.number(),
+        label: z.string(),
+        images: z.array(
+          z.object({
+            src: z.string(),
+            alt: z.string(),
+            orientation: z.enum(["horizontal", "vertical"]).default("vertical"),
+          }),
+        ),
+      }),
+    )
+    .default([]),
   sourcesIntro: z.string().optional(),
   sources: z
     .array(

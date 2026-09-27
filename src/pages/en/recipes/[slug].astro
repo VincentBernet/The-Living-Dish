@@ -88,7 +88,11 @@ const difficultyLabels = {
 
     <section>
       <h2 class="mb-6 text-2xl font-serif font-bold text-warm-900">Steps</h2>
-      <StepList steps={recipe.data.steps} locale={locale} />
+      <StepList
+        steps={recipe.data.steps}
+        stepImages={recipe.data.stepImages}
+        locale={locale}
+      />
     </section>
 
     {
