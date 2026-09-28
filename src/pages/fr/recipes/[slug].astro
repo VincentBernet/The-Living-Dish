@@ -30,6 +30,15 @@ const difficultyLabels = {
   medium: "Moyen",
   hard: "Difficile",
 };
+
+const dateFormatter = new Intl.DateTimeFormat("fr-FR", {
+  dateStyle: "long",
+  timeZone: "UTC",
+});
+const publishedDate = dateFormatter.format(recipe.data.pubDate);
+const updatedDate = dateFormatter.format(
+  recipe.data.updatedDate ?? recipe.data.pubDate,
+);
 ---
 
 <Layout
@@ -108,5 +117,31 @@ const difficultyLabels = {
         )
       }
     </section>
+
+    <footer
+      class="flex flex-col items-end gap-4 sm:flex-row sm:items-end sm:justify-between"
+    >
+      <div class="text-right text-sm text-warm-800 sm:text-left">
+        <p>
+          Publié le {" "}
+          <time datetime={recipe.data.pubDate.toISOString()}
+            >{publishedDate}</time
+          >
+        </p>
+        <p>
+          Dernière modification le {" "}
+          <time
+            datetime={(
+              recipe.data.updatedDate ?? recipe.data.pubDate
+            ).toISOString()}
+          >
+            {updatedDate}
+          </time>
+        </p>
+      </div>
+      <p class="recipe-signature -rotate-2" aria-label="Signature">
+        Vincent Bernet
+      </p>
+    </footer>
   </article>
 </Layout>

@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Caveat";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("../assets/fonts/Caveat-Variable-Latin.woff2") format("woff2");
+}
+
 @theme {
   --font-sans: "Segoe UI", system-ui, sans-serif;
   --font-serif: Georgia, "Times New Roman", serif;
@@ -15,6 +23,11 @@
 
 body {
   @apply bg-cream text-warm-900 font-sans antialiased;
+}
+
+.site-brand {
+  font-family: "Caveat", cursive;
+  font-weight: 700;
 }
 
 html.js-enabled .recipe-page img,
@@ -69,4 +82,10 @@ html.js-enabled .recipe-card-image.is-loaded {
 
 .recipe-prose .pickles-table tbody th {
   @apply border-t border-warm-200 text-left;
+}
+
+.recipe-signature {
+  @apply mt-12 mb-2 text-right text-4xl text-warm-900;
+  font-family: "Caveat", cursive;
+  font-weight: 500;
 }
