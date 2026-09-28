@@ -6,4 +6,12 @@ interface Props {
 const { image } = Astro.props;
 ---
 
-{image && <img src={image} alt="" class="aspect-[16/9] w-full object-cover" />}
+{
+  image && (
+    <img
+      src={image}
+      alt=""
+      class="recipe-card-image aspect-[16/9] w-full object-cover"
+    />
+  )
+}

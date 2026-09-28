@@ -17,17 +17,20 @@ body {
   @apply bg-cream text-warm-900 font-sans antialiased;
 }
 
-html.js-enabled .recipe-page img {
+html.js-enabled .recipe-page img,
+html.js-enabled .recipe-card-image {
   opacity: 0;
   transition: opacity 400ms ease-in-out;
 }
 
-html.js-enabled .recipe-page img.is-loaded {
+html.js-enabled .recipe-page img.is-loaded,
+html.js-enabled .recipe-card-image.is-loaded {
   opacity: 1;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html.js-enabled .recipe-page img {
+  html.js-enabled .recipe-page img,
+  html.js-enabled .recipe-card-image {
     transition: none;
   }
 }

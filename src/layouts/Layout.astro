@@ -31,16 +31,18 @@ const socialImage = image
       document.documentElement.classList.add("js-enabled");
 
       const initializeRecipeImageFades = () => {
-        document.querySelectorAll(".recipe-page img").forEach((image) => {
-          const revealImage = () => image.classList.add("is-loaded");
+        document
+          .querySelectorAll(".recipe-page img, .recipe-card-image")
+          .forEach((image) => {
+            const revealImage = () => image.classList.add("is-loaded");
 
-          if (image.complete) {
-            revealImage();
-          } else {
-            image.addEventListener("load", revealImage, { once: true });
-            image.addEventListener("error", revealImage, { once: true });
-          }
-        });
+            if (image.complete) {
+              revealImage();
+            } else {
+              image.addEventListener("load", revealImage, { once: true });
+              image.addEventListener("error", revealImage, { once: true });
+            }
+          });
       };
 
       if (document.readyState === "loading") {
