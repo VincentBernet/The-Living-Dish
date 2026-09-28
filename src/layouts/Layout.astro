@@ -45,13 +45,77 @@ const socialImage = image
           });
       };
 
+      const initializeRecipeImageLightboxes = () => {
+        document.querySelectorAll(".recipe-page").forEach((recipePage) => {
+          if (recipePage.dataset.lightboxInitialized) return;
+          recipePage.dataset.lightboxInitialized = "true";
+
+          recipePage.addEventListener("click", (event) => {
+            if (!(event.target instanceof HTMLImageElement)) return;
+
+            const image = event.target;
+            const lightbox = document.createElement("div");
+            const enlargedImage = document.createElement("img");
+
+            lightbox.className = "recipe-lightbox";
+            lightbox.setAttribute("role", "dialog");
+            lightbox.setAttribute("aria-modal", "true");
+            lightbox.setAttribute(
+              "aria-label",
+              image.alt ? `Enlarged image: ${image.alt}` : "Enlarged image",
+            );
+
+            enlargedImage.className = "recipe-lightbox-image";
+            enlargedImage.src = image.currentSrc || image.src;
+            enlargedImage.alt = image.alt;
+
+            const revealEnlargedImage = () => {
+              enlargedImage.classList.add("is-loaded");
+            };
+
+            if (enlargedImage.complete) {
+              revealEnlargedImage();
+            } else {
+              enlargedImage.addEventListener("load", revealEnlargedImage, {
+                once: true,
+              });
+              enlargedImage.addEventListener("error", revealEnlargedImage, {
+                once: true,
+              });
+            }
+
+            const closeLightbox = () => {
+              document.removeEventListener("keydown", handleKeydown);
+              document.body.classList.remove("recipe-lightbox-open");
+              lightbox.remove();
+            };
+
+            const handleKeydown = (keyboardEvent) => {
+              if (keyboardEvent.key === "Escape") closeLightbox();
+            };
+
+            lightbox.addEventListener("click", closeLightbox);
+
+            lightbox.append(enlargedImage);
+            document.body.append(lightbox);
+            document.body.classList.add("recipe-lightbox-open");
+            document.addEventListener("keydown", handleKeydown);
+          });
+        });
+      };
+
+      const initializeRecipeEnhancements = () => {
+        initializeRecipeImageFades();
+        initializeRecipeImageLightboxes();
+      };
+
       if (document.readyState === "loading") {
         document.addEventListener(
           "DOMContentLoaded",
-          initializeRecipeImageFades,
+          initializeRecipeEnhancements,
         );
       } else {
-        initializeRecipeImageFades();
+        initializeRecipeEnhancements();
       }
     </script>
     <title>{title}</title>

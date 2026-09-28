@@ -47,6 +47,46 @@ body {
   @apply bg-cream text-warm-900 font-sans antialiased;
 }
 
+.recipe-page img {
+  @apply cursor-zoom-in shadow-sm;
+}
+
+.recipe-lightbox-open {
+  overflow: hidden;
+}
+
+.recipe-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgb(42 31 21 / 84%);
+}
+
+.recipe-lightbox-image {
+  max-width: calc(100vw - 2rem);
+  max-height: calc(100vh - 2rem);
+  opacity: 0;
+  cursor: zoom-out;
+  object-fit: contain;
+  border-radius: 0.5rem;
+  box-shadow: 0 20px 50px rgb(0 0 0 / 35%);
+  transition: opacity 200ms ease-out;
+}
+
+.recipe-lightbox-image.is-loaded {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .recipe-lightbox-image {
+    transition: none;
+  }
+}
+
 .site-brand {
   font-weight: 700;
 }
