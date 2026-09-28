@@ -49,7 +49,7 @@ export default function ServingsScaler({
   };
 
   return (
-    <div className="grid items-start gap-x-8 gap-y-4 md:grid-cols-[1fr_2fr]">
+    <div className="grid items-start gap-x-2 gap-y-4 md:grid-cols-[1.2fr_1.8fr]">
       <div className="flex items-center justify-between gap-4 md:col-span-2">
         <h2 className="text-2xl font-serif font-bold text-warm-900">{title}</h2>
         <div className="flex items-center gap-2">
