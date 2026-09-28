@@ -27,6 +27,31 @@ const socialImage = image
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
+    <script is:inline>
+      document.documentElement.classList.add("js-enabled");
+
+      const initializeRecipeImageFades = () => {
+        document.querySelectorAll(".recipe-page img").forEach((image) => {
+          const revealImage = () => image.classList.add("is-loaded");
+
+          if (image.complete) {
+            revealImage();
+          } else {
+            image.addEventListener("load", revealImage, { once: true });
+            image.addEventListener("error", revealImage, { once: true });
+          }
+        });
+      };
+
+      if (document.readyState === "loading") {
+        document.addEventListener(
+          "DOMContentLoaded",
+          initializeRecipeImageFades,
+        );
+      } else {
+        initializeRecipeImageFades();
+      }
+    </script>
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
     <meta property="og:title" content={title} />
