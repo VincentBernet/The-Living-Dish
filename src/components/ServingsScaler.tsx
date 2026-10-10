@@ -12,6 +12,7 @@ interface Props {
   locale: "fr" | "en";
   title: string;
   ingredientsImage?: string;
+  ingredientsImageOrientation?: "horizontal" | "vertical";
   imageAlt: string;
 }
 
@@ -38,6 +39,7 @@ export default function ServingsScaler({
   locale,
   title,
   ingredientsImage,
+  ingredientsImageOrientation = "horizontal",
   imageAlt,
 }: Props) {
   const [servings, setServings] = useState(baseServings);
@@ -105,7 +107,11 @@ export default function ServingsScaler({
         <img
           src={ingredientsImage}
           alt={imageAlt}
-          className="aspect-[4/3] w-full rounded-lg object-cover md:self-center"
+          className={
+            ingredientsImageOrientation === "vertical"
+              ? "aspect-[3/4] w-full rounded-lg object-cover md:self-center"
+              : "aspect-[4/3] w-full rounded-lg object-cover md:self-center"
+          }
         />
       )}
     </div>

@@ -15,6 +15,10 @@ const recipeSchema = z.object({
   image: z.string().optional(),
   socialImage: z.string().optional(),
   ingredientsImage: z.string().optional(),
+  ingredientsImageOrientation: z
+    .enum(["horizontal", "vertical"])
+    .optional()
+    .default("horizontal"),
   translationKey: z.string(),
   ingredients: z.array(
     z.object({

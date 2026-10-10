@@ -24,6 +24,7 @@ Required fields (see `src/content.config.ts`):
 - `ingredients`: array of `{ quantity?, unit?, item }`
 - `steps`: array of strings
 - `tags`: optional string array
+- `ingredientsImage` + optional `ingredientsImageOrientation`: `horizontal` (default) or `vertical`
 
 ## MDX body
 
