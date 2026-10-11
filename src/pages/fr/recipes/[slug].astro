@@ -42,7 +42,7 @@ const updatedDate = dateFormatter.format(
 ---
 
 <Layout
-  title={`${recipe.data.title} — The Living Dish`}
+  title={`${recipe.data.title} - The Living Dish`}
   description={recipe.data.description}
   image={recipe.data.socialImage ?? recipe.data.image}
   locale={locale}
@@ -117,6 +117,12 @@ const updatedDate = dateFormatter.format(
                   >
                     {source.title}
                   </a>
+                  {" - "}
+                  {source.author}
+                  {" - "}
+                  <span class="font-semibold text-warm-700">
+                    {source.type === "video" ? "Vidéo" : "Article"}
+                  </span>
                 </li>
               ))}
             </ul>

@@ -61,7 +61,9 @@ const recipeSchema = z.object({
   sources: z
     .array(
       z.object({
+        type: z.enum(["article", "video"]),
         title: z.string(),
+        author: z.string(),
         url: z.string().url(),
       }),
     )
