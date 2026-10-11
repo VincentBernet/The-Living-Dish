@@ -1,6 +1,7 @@
 ---
 import { render } from "astro:content";
 import ImageMosaic from "../../../components/ImageMosaic.astro";
+import HandwrittenNote from "../../../components/HandwrittenNote.astro";
 import Layout from "../../../layouts/Layout.astro";
 import StepList from "../../../components/StepList.astro";
 import ServingsScaler from "../../../components/ServingsScaler";
@@ -86,14 +87,26 @@ const updatedDate = dateFormatter.format(
         ingredientsImageOrientation={recipe.data.ingredientsImageOrientation}
         imageAlt={`Ingrédients pour ${recipe.data.title}`}
       />
+      {
+        recipe.data.ingredientsNote && (
+          <p class="mt-5 text-warm-800 leading-relaxed">
+            {recipe.data.ingredientsNote}
+          </p>
+        )
+      }
 
-      <section class="mt-12">
+      <section class="mt-8">
         <h2 class="mb-6 text-2xl font-serif font-bold text-warm-900">Étapes</h2>
         <StepList
           steps={recipe.data.steps}
           stepImages={recipe.data.stepImages}
           locale={locale}
         />
+        {
+          recipe.data.stepsNote && (
+            <HandwrittenNote parts={recipe.data.stepsNote} />
+          )
+        }
       </section>
 
       {

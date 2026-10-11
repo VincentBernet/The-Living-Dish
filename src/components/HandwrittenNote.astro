@@ -1,0 +1,31 @@
+---
+interface NotePart {
+  text: string;
+  href?: string;
+}
+
+interface Props {
+  parts: NotePart[];
+}
+
+const { parts } = Astro.props;
+---
+
+<aside
+  class="recipe-handwritten-note recipe-handwritten-note-black font-handwriting"
+  role="note"
+>
+  <span>
+    {
+      parts.map((part) =>
+        part.href ? (
+          <a class="underline underline-offset-2" href={part.href}>
+            {part.text}
+          </a>
+        ) : (
+          part.text
+        ),
+      )
+    }
+  </span>
+</aside>

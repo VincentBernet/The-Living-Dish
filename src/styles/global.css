@@ -120,6 +120,19 @@ html.js-enabled .recipe-card-image.is-loaded {
   transform: rotate(-1deg);
 }
 
+.recipe-handwritten-note p {
+  margin-bottom: 0;
+}
+
+.recipe-handwritten-note.recipe-handwritten-note-black,
+.recipe-handwritten-note.recipe-handwritten-note-black a {
+  color: #000;
+}
+
+.recipe-handwritten-note.recipe-handwritten-note-with-stamp {
+  align-items: center;
+}
+
 .recipe-handwritten-arrow {
   width: 2.325rem;
   height: 1.75rem;
@@ -133,6 +146,18 @@ html.js-enabled .recipe-card-image.is-loaded {
   stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
+}
+
+.recipe-page .recipe-handwritten-stamp {
+  width: 6.5rem;
+  height: 6.5rem;
+  flex-shrink: 0;
+  align-self: center;
+  margin-top: 0;
+  object-fit: contain;
+  pointer-events: none;
+  cursor: default;
+  box-shadow: none;
 }
 
 .recipe-prose h2 {

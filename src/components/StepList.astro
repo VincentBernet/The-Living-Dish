@@ -15,7 +15,8 @@ interface Props {
   }[];
 }
 
-const { steps, stepImages = [] } = Astro.props;
+const { steps, stepImages = [], locale } = Astro.props;
+const miseEnPlaceLabel = "Mise en place";
 ---
 
 <ol class="space-y-4">
@@ -26,7 +27,16 @@ const { steps, stepImages = [] } = Astro.props;
           {index + 1}
         </span>
         <div class="min-w-0 flex-1">
-          <p class="pt-1 text-warm-800 leading-relaxed">{step}</p>
+          <p class="pt-1 text-warm-800 leading-relaxed">
+            {locale === "en" && step.startsWith(`${miseEnPlaceLabel}:`) ? (
+              <>
+                <em>{miseEnPlaceLabel}</em>
+                {step.slice(miseEnPlaceLabel.length)}
+              </>
+            ) : (
+              step
+            )}
+          </p>
           {stepImages
             .filter((mosaic) => mosaic.afterStep === index + 1)
             .map((mosaic) => (

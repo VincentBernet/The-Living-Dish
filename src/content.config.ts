@@ -27,7 +27,16 @@ const recipeSchema = z.object({
       item: z.string(),
     }),
   ),
+  ingredientsNote: z.string().optional(),
   steps: z.array(z.string()),
+  stepsNote: z
+    .array(
+      z.object({
+        text: z.string(),
+        href: z.string().optional(),
+      }),
+    )
+    .optional(),
   stepImages: z
     .array(
       z.object({
