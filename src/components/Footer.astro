@@ -1,5 +1,6 @@
 ---
 import type { Locale } from "../lib/recipes";
+import InstagramIcon from "./InstagramIcon.astro";
 
 interface Props {
   locale: Locale;
@@ -10,13 +11,29 @@ const { locale } = Astro.props;
 const labels = {
   fr: {
     tagline: "© 2026 - The Living Dish - Recettes et histoire de cuisine",
+    instagram: "Suivre The Living Dish sur Instagram",
   },
-  en: { tagline: "© 2026 - The Living Dish - Recipes and food history" },
+  en: {
+    tagline: "© 2026 - The Living Dish - Recipes and food history",
+    instagram: "Follow The Living Dish on Instagram",
+  },
 };
 ---
 
 <footer class="border-t border-warm-200 bg-warm-50 mt-auto">
-  <div class="mx-auto max-w-5xl px-4 py-6 text-center text-sm text-warm-800">
+  <div
+    class="mx-auto flex max-w-5xl flex-col items-center gap-3 px-4 py-6 text-center text-sm text-warm-800 sm:flex-row sm:justify-center sm:gap-6"
+  >
     <p>{labels[locale].tagline}</p>
+    <a
+      href="https://www.instagram.com/livingdish"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={labels[locale].instagram}
+      class="inline-flex items-center gap-2 font-medium transition-colors hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:border-l sm:border-warm-200 sm:pl-6"
+    >
+      <InstagramIcon class="h-5 w-5" />
+      <span>@livingdish</span>
+    </a>
   </div>
 </footer>
