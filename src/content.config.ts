@@ -73,7 +73,7 @@ const recipeSchema = z.object({
         type: z.enum(["article", "video"]),
         title: z.string(),
         author: z.string(),
-        url: z.string().url(),
+        url: z.url(),
       }),
     )
     .default([]),

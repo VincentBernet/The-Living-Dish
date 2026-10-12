@@ -10,7 +10,7 @@ interface Props {
   locale: "fr" | "en";
 }
 
-const { ingredients, locale } = Astro.props;
+const { ingredients } = Astro.props;
 
 function formatIngredient(ingredient: Ingredient): string {
   const parts: string[] = [];

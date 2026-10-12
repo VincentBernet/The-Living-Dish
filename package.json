@@ -12,11 +12,12 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
+    "tsc": "astro check && pnpm exec tsc --noEmit",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "prettier": "prettier --check .",
     "prettier:fix": "prettier --write .",
-    "ci": "pnpm run lint && pnpm run prettier && pnpm run build",
+    "ci": "pnpm run lint && pnpm run prettier && pnpm run tsc && pnpm run build",
     "prepare": "husky"
   },
   "dependencies": {
@@ -26,18 +27,21 @@
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.4",
     "astro": "^7.2.4",
+    "marked": "^18.1.1",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "tailwindcss": "^4.3.3",
     "zod": "^4.4.3"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.10",
     "eslint": "^10.9.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-astro": "^3.1.0",
     "husky": "^9.1.7",
     "prettier": "^3.9.6",
     "prettier-plugin-astro": "^0.14.1",
+    "typescript": "^6.0.3",
     "typescript-eslint": "^8.67.0"
   }
 }

@@ -1,9 +1,10 @@
 ---
+import { marked } from "marked";
+
 import ImageMosaic from "./ImageMosaic.astro";
 
 interface Props {
   steps: string[];
-  locale: "fr" | "en";
   stepImages?: {
     afterStep: number;
     label: string;
@@ -15,8 +16,7 @@ interface Props {
   }[];
 }
 
-const { steps, stepImages = [], locale } = Astro.props;
-const miseEnPlaceLabel = "Mise en place";
+const { steps, stepImages = [] } = Astro.props;
 ---
 
 <ol class="space-y-4">
@@ -27,16 +27,10 @@ const miseEnPlaceLabel = "Mise en place";
           {index + 1}
         </span>
         <div class="min-w-0 flex-1">
-          <p class="pt-1 text-warm-800 leading-relaxed">
-            {locale === "en" && step.startsWith(`${miseEnPlaceLabel}:`) ? (
-              <>
-                <em>{miseEnPlaceLabel}</em>
-                {step.slice(miseEnPlaceLabel.length)}
-              </>
-            ) : (
-              step
-            )}
-          </p>
+          <p
+            class="pt-1 text-warm-800 leading-relaxed"
+            set:html={marked.parseInline(step)}
+          />
           {stepImages
             .filter((mosaic) => mosaic.afterStep === index + 1)
             .map((mosaic) => (
