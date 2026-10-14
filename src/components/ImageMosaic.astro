@@ -1,6 +1,7 @@
 ---
 interface Props {
   label: string;
+  caption?: string;
   images: {
     src: string;
     alt: string;
@@ -8,10 +9,10 @@ interface Props {
   }[];
 }
 
-const { label, images } = Astro.props;
+const { label, caption, images } = Astro.props;
 ---
 
-<div class="recipe-mosaic mt-6" aria-label={label}>
+<figure class="recipe-mosaic mt-6" aria-label={label}>
   <div class="grid grid-cols-2 gap-3">
     {
       images.map((image) => (
@@ -28,4 +29,11 @@ const { label, images } = Astro.props;
       ))
     }
   </div>
-</div>
+  {
+    caption && (
+      <figcaption class="mt-3 text-center text-sm italic text-warm-700">
+        {caption}
+      </figcaption>
+    )
+  }
+</figure>

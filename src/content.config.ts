@@ -66,6 +66,19 @@ const recipeSchema = z.object({
       }),
     )
     .default([]),
+  closingGallery: z
+    .object({
+      label: z.string(),
+      caption: z.string().optional(),
+      images: z.array(
+        z.object({
+          src: z.string(),
+          alt: z.string(),
+          orientation: z.enum(["horizontal", "vertical"]).default("vertical"),
+        }),
+      ),
+    })
+    .optional(),
   sourcesIntro: z.string().optional(),
   sources: z
     .array(

@@ -89,7 +89,7 @@ const updatedDate = dateFormatter.format(
       />
       {
         recipe.data.ingredientsNote && (
-          <p class="mt-5 text-warm-800 leading-relaxed">
+          <p class="mt-5 whitespace-pre-line text-warm-800 leading-relaxed">
             {recipe.data.ingredientsNote}
           </p>
         )
@@ -133,6 +133,16 @@ const updatedDate = dateFormatter.format(
             ))}
           </ul>
         </section>
+      )
+    }
+
+    {
+      recipe.data.closingGallery && (
+        <ImageMosaic
+          label={recipe.data.closingGallery.label}
+          caption={recipe.data.closingGallery.caption}
+          images={recipe.data.closingGallery.images}
+        />
       )
     }
 
