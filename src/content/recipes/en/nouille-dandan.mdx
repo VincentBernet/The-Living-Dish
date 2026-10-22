@@ -32,13 +32,15 @@ ingredients:
     item: of soy sauce
   - quantity: 1
     unit: tbsp
-    item: of dark soy sauce *
+    item: of dark soy sauce
+    footnoteId: black-vinegar
   - quantity: 1
     unit: tbsp
     item: of sugar
   - quantity: 1
     unit: tbsp
-    item: of black vinegar *
+    item: of black vinegar
+    footnoteId: black-vinegar
   - quantity: 2
     unit: tbsp
     item: of chili oil
@@ -53,7 +55,8 @@ ingredients:
     item: of scallions
   - quantity: 400
     unit: g
-    item: of udon (a little more if fresh, less if dried)*
+    item: of udon (a little more if fresh, less if dried)
+    footnoteId: noodles
   - quantity: 1
     unit: bunch
     item: of cilantro
@@ -64,10 +67,19 @@ ingredients:
     unit: tbsp
     item: of toasted sesame oil
 
-ingredientsNote: >-
-  * If you can't find black vinegar at an Asian grocery store, you can simply replace it with regular rice vinegar, and likewise replace dark soy sauce with light soy sauce (the regular kind)
-
-  * When it comes to noodles, the choice is fairly open. Personally, I recommend noodles with a firm and elastic texture, so I use udon (fresh or frozen, not dehydrated noodles, which lose their elasticity) or, as a more traditional choice, Chinese wheat noodles (specifically alkaline wheat noodles: 碱水面, jiǎnshuǐ miàn)
+ingredientsFootnotes:
+  - id: black-vinegar
+    text: >-
+      If you can't find black vinegar at an Asian grocery store, you can
+      replace it with regular rice vinegar. Likewise, replace dark soy sauce
+      with light soy sauce (the regular kind).
+  - id: noodles
+    text: >-
+      The choice of noodles is fairly open. Personally, I recommend noodles
+      with a firm and elastic texture, so I use udon (fresh or frozen, not
+      dehydrated noodles, which lose their elasticity) or, more traditionally,
+      Chinese wheat noodles, specifically alkaline wheat noodles (碱水面,
+      jiǎnshuǐ miàn).
 
 steps:
   - "_Mise en place_ - cut your garlic and ginger and run them through a microplane (or chop them very finely), cut your scallions, separating the green parts from the white parts, and chop the cilantro if you like it, and finally chop your peanuts with a knife (or roughly crush them in a mortar; we want to keep some texture). Toast your Sichuan pepper in your wok for 2 to 3 minutes, then grind it in a mill or crush it in a mortar."
@@ -122,6 +134,8 @@ sources:
 sourcesIntro: "After discovering this dish at Bises Nouilles (in Belleville, in the 19th arrondissement 🍴), which sparked a new obsession, these articles and videos helped satisfy my curiosity; go check them out!"
 ---
 
+import FootnoteRef from "../../../components/FootnoteRef.astro";
+
 ## Origin
 
 Dandan noodles are a Chinese dish from Sichuan province, a region known for its spicy cuisine that really heats up the palate. In Chinese, their name is _Dandan Mian_ (担担面, “carried noodles”), where _dandan_ refers to the wooden or bamboo baskets that street noodle vendors carried on their backs using a shoulder pole. These baskets held the famous noodles they sold right on the street.
@@ -129,11 +143,12 @@ Dandan noodles are a Chinese dish from Sichuan province, a region known for its 
 ## Rich & savory noodles
 
 This noodle dish breaks down into 4 components, in the order they go in the bowl: the sauce, the noodles, the ground pork and the toppings.
-The characteristic flavor is in the sauce, which is very bold, with the chili oil and **Sichuan pepper \*** balanced by the richness of the sesame and peanut pastes (you need to pay close attention to the bitterness these products can bring).
+The characteristic flavor is in the sauce, which is very bold, with the chili oil and **<FootnoteRef id="sichuan-pepper" label="Sichuan pepper" ariaLabel="Sichuan pepper, see note" />** balanced by the richness of the sesame and peanut pastes (you need to pay close attention to the bitterness these products can bring).
 On top of that, you have soy sauce, black vinegar, garlic, ginger and chili oil (store-bought or [here is a recipe to make it at home](/en/recipes/huile-pimente/)).
 The dish can quickly become quite bitter from the peanuts and very salty from the soy sauce, so be careful about that and do not salt the meat or your noodles. Don't forget to loosen your sauce with 4 to 5 tablespoons of cooking water.
 
 <aside
+  id="footnote-sichuan-pepper"
   class="recipe-handwritten-note recipe-handwritten-note-with-stamp font-handwriting"
   role="note"
 >
@@ -145,11 +160,18 @@ The dish can quickly become quite bitter from the peanuts and very salty from th
     height="512"
     aria-hidden="true"
   />
-  <span>
-    \* Sichuan pepper is a very distinctive spice that brings heat but also has
-    citrusy notes, although what really sets it apart is its numbing quality.
-    You have to experience it at least once to understand!
-  </span>
+  <p>
+    <a
+      href="#footnote-ref-sichuan-pepper"
+      class="recipe-footnote-marker-link"
+      aria-label="Back to reference"
+    >
+      {"*"}
+    </a>{" "}
+    {
+      "Sichuan pepper is a very distinctive spice that brings heat but also has citrusy notes, although what really sets it apart is its numbing quality. You have to experience it at least once to understand!"
+    }
+  </p>
 </aside>
 
 As for the meat, pork is the traditional choice and works really well because of its fattiness. But unlike beef, it is not always easy to find ground pork at the supermarket. So I recommend asking your butcher directly if they can run pork shoulder or loin through the grinder, for example. Better yet, go to Tang Frères (an Asian supermarket in Paris, a real gold mine; take the opportunity to stock up on supplies for your Asian pantry)!

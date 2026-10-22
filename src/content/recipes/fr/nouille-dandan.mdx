@@ -32,13 +32,15 @@ ingredients:
     item: de sauce soja
   - quantity: 1
     unit: c. à s.
-    item: de sauce soja foncée *
+    item: de sauce soja foncée
+    footnoteId: vinaigre-noir
   - quantity: 1
     unit: c. à s.
     item: de sucre
   - quantity: 1
     unit: c. à s.
-    item: de vinaigre noir *
+    item: de vinaigre noir
+    footnoteId: vinaigre-noir
   - quantity: 2
     unit: c. à s.
     item: d'huile pimentée
@@ -53,7 +55,8 @@ ingredients:
     item: de ciboule
   - quantity: 400
     unit: g
-    item: d'udon (un peu plus si fraîches, moins si sèches)*
+    item: d'udon (un peu plus si fraîches, moins si sèches)
+    footnoteId: nouilles
   - quantity: 1
     unit: botte
     item: de coriandre
@@ -64,10 +67,18 @@ ingredients:
     unit: c. à s.
     item: d'huile de sésame torréfiée
 
-ingredientsNote: >-
-  * Si vous ne trouvez pas en épicerie asiatique de vinaigre noir, vous pouvez simplement le remplacer par du vinaigre de riz classique, idem pour la sauce soja foncée remplacez-la par de la sauce soja claire (la classique)
-
-  * Au niveau des nouilles le choix est assez libre, personnellement je recommande des nouilles avec une texture ferme & élastique, je pars donc sur des udons (fraîches ou surgelés, pas les déshydratés qui perdent leur élasticité) ou choix plus traditionnel des nouilles de blés chinoises (spécifiquement les nouilles de blé alcaline: 碱水面, jiǎnshuǐ miàn)
+ingredientsFootnotes:
+  - id: vinaigre-noir
+    text: >-
+      Si vous ne trouvez pas de vinaigre noir en épicerie asiatique, vous
+      pouvez simplement le remplacer par du vinaigre de riz classique. Idem pour la sauce soja foncée, remplacez-là par de la sauce soja claire (la classique).
+  - id: nouilles
+    text: >-
+      Le choix des nouilles est assez libre. Personnellement, je recommande des
+      nouilles avec une texture ferme et élastique : des udons (fraîches ou
+      surgelées, pas les déshydratées qui perdent leur élasticité) ou, plus
+      traditionnellement, des nouilles de blé chinoises, spécifiquement les
+      nouilles de blé alcalines (碱水面, jiǎnshuǐ miàn).
 steps:
   - "Mise en place : découpez l'ail et le gingembre et passez-les à la microplane (ou hachez-les très finement), découpez la ciboule en séparant le vert du blanc, et découpez la coriandre si vous aimez ça, et enfin venez couper vos cacahuètes au couteau (ou passez-les grossièrement au mortier, on veut garder un jeu de texture). Faites torréfier votre poivre du Sichuan 2 à 3 minutes dans votre wok, puis passez-le au moulin ou écrasez-le au mortier."
   - Prenez un bol et mélangez le tahini (pâte de sésame), la pâte de cacahuète, votre vinaigre noir, la sauce soja et l'huile pimentée, une cuillère à soupe de sucre, la moitié de l'ail, du gingembre et du poivre.
@@ -121,6 +132,8 @@ sources:
 sourcesIntro: "Après la découverte de ce plat chez Bises Nouilles (dans le 19e à Belleville 🍴), qui m'a valu une nouvelle obsession, ces articles & vidéos ont pu assouvir ma curiosité, allez-y jeter un œil !"
 ---
 
+import FootnoteRef from "../../../components/FootnoteRef.astro";
+
 ## Origine
 
 Les nouilles Dandan sont un plat chinois, de la province du Sichuan, qui est une région réputée pour sa cuisine pimentée, qui fait vraiment chauffer le palais. En chinois, leur nom est _Dandan Mian_ (担担面, « nouilles portées »), où _dandan_ désigne les paniers en bois ou en bambou que les vendeurs de nouilles ambulants portaient sur leur dos à l'aide d'une planche. Ces paniers contenaient les fameuses nouilles qu'ils vendaient directement dans la rue.
@@ -128,11 +141,12 @@ Les nouilles Dandan sont un plat chinois, de la province du Sichuan, qui est une
 ## Des nouilles riches & savoureuses
 
 Ce plat de nouilles peut se décomposer en 4 composants, dans l'ordre de disposition dans le bol : la sauce, les nouilles, le porc haché et les toppings.
-Le goût caractéristique réside dans la sauce qui est très relevée, avec l'huile pimentée et le **poivre de Sichuan \*** qui sont contrebalancés par la rondeur apportée par la pâte de sésame et de cacahuète (ici il faut bien faire attention à l'amertume que peuvent apporter ces produits).
+Le goût caractéristique réside dans la sauce qui est très relevée, avec l'huile pimentée et le **<FootnoteRef id="poivre-sichuan" label="poivre de Sichuan" />** qui sont contrebalancés par la rondeur apportée par la pâte de sésame et de cacahuète (ici il faut bien faire attention à l'amertume que peuvent apporter ces produits).
 À cela s'ajoutent les sauces soja, le vinaigre noir, l'ail et le gingembre ainsi que de l'huile pimenté (du commerce ou [ici une recette pour en faire maison](/fr/recipes/huile-pimente/)).
 Le plat peut vite devenir assez amer avec les arachides et aussi très salé avec la sauce soja, donc soyez vigilants à ce niveau-là, ne salez ni la viande ni vos nouilles. N'oubliez pas de venir diluer votre sauce avec 4 à 5 c. à s. d'eau de cuisson.
 
 <aside
+  id="footnote-poivre-sichuan"
   class="recipe-handwritten-note recipe-handwritten-note-with-stamp font-handwriting"
   role="note"
 >
@@ -144,12 +158,18 @@ Le plat peut vite devenir assez amer avec les arachides et aussi très salé ave
     height="512"
     aria-hidden="true"
   />
-  <span>
-    \* Le poivre du Sichuan est une épice très particulière, qui pimente certes
-    mais qui présente aussi des notes citronnées, mais ce qui fait sa
-    particularité, c'est son côté anesthésiant. À tester au moins une fois pour
-    comprendre !
-  </span>
+  <p>
+    <a
+      href="#footnote-ref-poivre-sichuan"
+      class="recipe-footnote-marker-link"
+      aria-label="Retour à la référence"
+    >
+      {"*"}
+    </a>{" "}
+    {
+      "Le poivre du Sichuan est une épice très particulière, qui pimente certes mais qui présente aussi des notes citronnées, mais ce qui fait sa particularité, c'est son côté anesthésiant. À tester au moins une fois pour comprendre !"
+    }
+  </p>
 </aside>
 
 Pour ce qui est de la viande, le porc est le choix traditionnel, il s'y prête très bien de par son côté gras. Mais a contrario du bœuf, il n'est pas toujours évident d'en trouver hachée au supermarché. Alors je vous conseille d'aller demander directement chez votre boucher s'il peut vous passer au hachoir de l'échine de porc ou de la longe par exemple. Le mieux encore est d'aller chez Tang Frères (supermarché asiatique dans Paris, une vraie mine d'or, profitez-en pour faire le plein pour votre épicerie asiatique) !

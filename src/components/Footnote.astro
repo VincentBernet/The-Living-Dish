@@ -1,0 +1,26 @@
+---
+interface Props {
+  id: string;
+  marker?: string;
+  backAriaLabel?: string;
+}
+
+const {
+  id,
+  marker = "*",
+  backAriaLabel = "Retour à la référence",
+} = Astro.props;
+const referenceId = `footnote-ref-${id}`;
+const noteId = `footnote-${id}`;
+---
+
+<aside id={noteId} class="recipe-footnote" role="note" tabindex="-1">
+  <div class="recipe-footnote-copy">
+    <a
+      href={`#${referenceId}`}
+      class="recipe-footnote-marker-link"
+      aria-label={backAriaLabel}>{marker}</a
+    >
+    <div class="recipe-footnote-text"><slot /></div>
+  </div>
+</aside>

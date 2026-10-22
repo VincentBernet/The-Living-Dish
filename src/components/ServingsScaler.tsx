@@ -4,6 +4,7 @@ export interface Ingredient {
   quantity?: number;
   unit?: string;
   item: string;
+  footnoteId?: string;
 }
 
 interface Props {
@@ -46,8 +47,18 @@ export default function ServingsScaler({
   const multiplier = servings / baseServings;
 
   const labels = {
-    fr: { servings: "Portions", decrease: "Diminuer", increase: "Augmenter" },
-    en: { servings: "Servings", decrease: "Decrease", increase: "Increase" },
+    fr: {
+      servings: "Portions",
+      decrease: "Diminuer",
+      increase: "Augmenter",
+      seeNote: "Voir la note",
+    },
+    en: {
+      servings: "Servings",
+      decrease: "Decrease",
+      increase: "Increase",
+      seeNote: "See note",
+    },
   };
 
   return (
@@ -94,12 +105,28 @@ export default function ServingsScaler({
 
       <div>
         <ul className="space-y-2">
-          {ingredients.map((ingredient, index) => (
-            <li key={index} className="flex items-start gap-2 text-warm-800">
-              <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
-              <span>{formatIngredient(ingredient, multiplier)}</span>
-            </li>
-          ))}
+          {ingredients.map((ingredient, index) => {
+            const ingredientLabel = formatIngredient(ingredient, multiplier);
+
+            return (
+              <li key={index} className="flex items-start gap-2 text-warm-800">
+                <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                <span>
+                  {ingredientLabel}
+                  {ingredient.footnoteId && (
+                    <a
+                      id={`footnote-ref-${ingredient.footnoteId}`}
+                      href={`#footnote-${ingredient.footnoteId}`}
+                      className="recipe-footnote-reference"
+                      aria-label={`${ingredientLabel}, ${labels[locale].seeNote}`}
+                    >
+                      *
+                    </a>
+                  )}
+                </span>
+              </li>
+            );
+          })}
         </ul>
       </div>
 

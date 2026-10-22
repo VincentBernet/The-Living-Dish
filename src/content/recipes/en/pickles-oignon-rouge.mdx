@@ -21,6 +21,7 @@ ingredients:
   - quantity: 2
     unit: large glasses
     item: of vinegar
+    footnoteId: vinegar-acidity
   - quantity: 0.6667
     unit: large glasses
     item: of sugar
@@ -42,6 +43,12 @@ ingredients:
     item: cloves
   - quantity: 4
     item: bay leaves
+ingredientsFootnotes:
+  - id: vinegar-acidity
+    text: >-
+      Vinegar with 6 to 8% acidity; if the acidity is higher, adjust the
+      remaining proportions to dilute it more strongly.
+    backAriaLabel: Back to reference
 steps:
   - Thinly slice the red onions into strips or half-moons.
   - Pack the onions tightly into one or more clean jars.
@@ -76,6 +83,8 @@ sources:
     url: https://www.vietworldkitchen.com/blog/2017/07/japanese-pickled-ginger-recipe-gari.html
 sourcesIntro: "To learn about different pickle traditions and their preparation techniques, I drew on the following articles, which I strongly encourage you to read; they are real gold mines (also check out their blogs and other recipes, which are very high quality):"
 ---
+
+import FootnoteRef from "../../../components/FootnoteRef.astro";
 
 ## Origins
 
@@ -138,7 +147,7 @@ And, like any attempt at classification, this remains a simplification of a more
 
 After this brief preamble, let’s get our hands into the dish, or rather, the pickles! In terms of flavor profile, red onion pickles bring acidity, sweetness, and a little crunch to many dishes. They pair particularly well with salads, cheese, and charcuterie. A nice touch: vinegar brings out anthocyanins, natural pigments in red onions. As they diffuse into the brine, they give it a lovely red-to-pink color, which the pickles retain and which enhances dishes through both color and flavor.
 
-The brine is based on equal parts vinegar\* and water, with two-thirds as much sugar and a generous amount of salt. This is a fairly common base among different vinegar-pickled recipes. The spices (fennel, coriander, mustard seeds, cloves, and bay leaves) will add aromatic depth. This combination of aromas and acidity can enhance many dishes, making it particularly well suited to cut through their richness (rillettes or other pâtés, carnitas tacos, etc.).
+The brine is based on equal parts <FootnoteRef id="vinegar-acidity" label="vinegar" ariaLabel="vinegar, see note" /> and water, with two-thirds as much sugar and a generous amount of salt. This is a fairly common base among different vinegar-pickled recipes. The spices (fennel, coriander, mustard seeds, cloves, and bay leaves) will add aromatic depth. This combination of aromas and acidity can enhance many dishes, making it particularly well suited to cut through their richness (rillettes or other pâtés, carnitas tacos, etc.).
 
 You can also have fun with different vegetables while keeping the same brine and spices. Alongside red onions, I often make carrots (cut on the bias or into star shapes), as well as cauliflower (just the florets). One marinade and spice blend for three cuts, and you are all set with three pickled vegetables.
 
@@ -161,8 +170,6 @@ Once the pickles are finished, do not throw away the brine: this precious liquid
     mayonnaise!
   </span>
 </aside>
-
-\* Vinegar with 6 to 8% acidity; if the acidity is higher, adjust the remaining proportions to dilute it more strongly.
 
 <div class="recipe-mosaic my-10" aria-label="Horizontal image gallery">
   <div class="grid grid-cols-2 gap-3">

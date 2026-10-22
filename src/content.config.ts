@@ -25,9 +25,20 @@ const recipeSchema = z.object({
       quantity: z.number().optional(),
       unit: z.string().optional(),
       item: z.string(),
+      footnoteId: z.string().optional(),
     }),
   ),
   ingredientsNote: z.string().optional(),
+  ingredientsFootnotes: z
+    .array(
+      z.object({
+        id: z.string(),
+        text: z.string(),
+        marker: z.string().optional(),
+        backAriaLabel: z.string().optional(),
+      }),
+    )
+    .default([]),
   steps: z.array(z.string()),
   stepsNote: z
     .array(
