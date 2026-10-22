@@ -190,6 +190,7 @@ html.js-enabled .recipe-card-image.is-loaded {
 .recipe-prose .recipe-footnote-reference {
   color: inherit;
   text-decoration: none;
+  scroll-margin-top: 45vh;
 }
 
 .recipe-footnote {
