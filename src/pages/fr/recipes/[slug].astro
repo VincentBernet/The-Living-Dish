@@ -6,7 +6,11 @@ import HandwrittenNote from "../../../components/HandwrittenNote.astro";
 import Layout from "../../../layouts/Layout.astro";
 import StepList from "../../../components/StepList.astro";
 import ServingsScaler from "../../../components/ServingsScaler";
-import { getRecipesByLocale, getSlugFromId } from "../../../lib/recipes";
+import {
+  getAlternateRecipe,
+  getRecipesByLocale,
+  getSlugFromId,
+} from "../../../lib/recipes";
 
 const locale = "fr";
 
@@ -26,6 +30,13 @@ if (!recipe) {
 }
 
 const { Content } = await render(recipe);
+const alternateRecipe = await getAlternateRecipe(recipe, "en");
+const alternatePaths = {
+  fr: `/fr/recipes/${slug}`,
+  ...(alternateRecipe && {
+    en: `/en/recipes/${getSlugFromId(alternateRecipe.id)}`,
+  }),
+};
 
 const difficultyLabels = {
   easy: "Facile",
@@ -48,6 +59,7 @@ const updatedDate = dateFormatter.format(
   description={recipe.data.description}
   image={recipe.data.socialImage ?? recipe.data.image}
   locale={locale}
+  alternates={alternatePaths}
 >
   <article class="recipe-page mx-auto max-w-3xl px-4 py-12">
     <header class="mb-10">

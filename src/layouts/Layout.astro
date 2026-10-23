@@ -9,14 +9,16 @@ interface Props {
   description?: string;
   image?: string;
   locale: Locale;
+  alternates?: Partial<Record<Locale, string>>;
 }
 
-const { title, description, image, locale } = Astro.props;
-const siteUrl = "https://the-living-dish.netlify.app";
+const { title, description, image, locale, alternates } = Astro.props;
+const siteUrl = Astro.site ?? new URL("https://thelivingdish.com");
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
 const socialImage = image
   ? new URL(image, siteUrl).href
-  : `${siteUrl}/images/og-image.png`;
+  : new URL("/images/og-image.png", siteUrl).href;
+const alternatePaths = alternates ?? { [locale]: Astro.url.pathname };
 ---
 
 <!doctype html>
@@ -26,6 +28,17 @@ const socialImage = image
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    {
+      Object.entries(alternatePaths).map(([alternateLocale, path]) => (
+        <link
+          rel="alternate"
+          hreflang={alternateLocale}
+          href={new URL(path, siteUrl).href}
+        />
+      ))
+    }
     <meta name="generator" content={Astro.generator} />
     <script is:inline>
       document.documentElement.classList.add("js-enabled");
