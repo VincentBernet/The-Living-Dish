@@ -20,3 +20,11 @@ Consult these guides before working on related tasks:
 - [Adding or managing content](https://docs.astro.build/en/guides/content-collections/)
 - [Adding styles or using Tailwind](https://docs.astro.build/en/guides/styling/)
 - [Supporting multiple languages](https://docs.astro.build/en/guides/internationalization/)
+
+## Orthographe
+
+When asked to fix spelling in content, only correct spelling mistakes and verb conjugation. Never change the meaning or content, grammar, punctuation, phrasing, tone, word choice, or writing style. Preserve the original structure and line breaks whenever possible.
+
+## Traductions
+
+The French version is the source of truth for recipe content. Whenever the French version is updated, update the corresponding English version to match it. Keep the same meaning, structure, and level of detail in both languages.
