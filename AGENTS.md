@@ -42,3 +42,7 @@ In recipe steps, always abbreviate time units:
 Use a space between the number and the unit. Never pluralize unit abbreviations.
 Write time ranges using à in French (e.g., 4 à 5 min) and to in English (e.g., 4 to 5 min).
 Outside recipe steps, time units may be written in full (secondes, minutes, seconds, minutes) when more natural in prose.
+
+## Recipe Updates
+
+Whenever a recipe is updated, set its `updatedDate` field to the current date in `YYYY-MM-DD` format. Update the corresponding French and English recipe files together.
