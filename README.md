@@ -1,6 +1,6 @@
 # 🍽️ The Living Dish
 
-[![blog](https://img.shields.io/badge/blog-000?style=for-the-badge&logo=googlechrome&logoColor=white)](https://the-living-dish.netlify.app/en/recipes/nouille-dandan/)
+[![blog](https://img.shields.io/badge/blog-000?style=for-the-badge&logo=googlechrome&logoColor=white)](https://thelivingdish.com/fr/)
 [![tracking dashboard](https://img.shields.io/badge/tracking_dashboard-000?style=for-the-badge&logo=goatcounter&logoColor=white)](https://vincent-bernet.goatcounter.com/)
 [![Google Search Console](https://img.shields.io/badge/google_search_console-000?style=for-the-badge&logo=google&logoColor=white)](https://search.google.com/search-console?resource_id=sc-domain%3Athelivingdish.com)
 [![Netlify](https://img.shields.io/badge/netlify-000?style=for-the-badge&logo=netlify&logoColor=white)](https://app.netlify.com/projects/the-living-dish/deploys)

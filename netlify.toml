@@ -9,3 +9,4 @@
   from = "/"
   to = "/fr/"
   status = 301
+  force = true
