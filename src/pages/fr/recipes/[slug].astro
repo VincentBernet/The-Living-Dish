@@ -1,5 +1,6 @@
 ---
 import { render } from "astro:content";
+import { marked } from "marked";
 import Footnote from "../../../components/Footnote.astro";
 import ImageMosaic from "../../../components/ImageMosaic.astro";
 import HandwrittenNote from "../../../components/HandwrittenNote.astro";
@@ -142,7 +143,9 @@ const updatedDate = dateFormatter.format(
         recipe.data.sources.length > 0 && (
           <section class="recipe-prose mt-10 max-w-none">
             <h2>Inspiration &amp; sources</h2>
-            {recipe.data.sourcesIntro && <p>{recipe.data.sourcesIntro}</p>}
+            {recipe.data.sourcesIntro && (
+              <p set:html={marked.parseInline(recipe.data.sourcesIntro)} />
+            )}
             <ul>
               {recipe.data.sources.map((source) => (
                 <li>
