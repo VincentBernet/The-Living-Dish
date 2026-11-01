@@ -32,12 +32,15 @@ async function getHref(locale: Locale): Promise<string> {
 const href = await getHref(targetLocale);
 ---
 
-<nav aria-label={currentLocale === "fr" ? "Langue" : "Language"}>
+<nav
+  class="flex items-center"
+  aria-label={currentLocale === "fr" ? "Langue" : "Language"}
+>
   {
     targetLocale === "fr" ? (
       <a
         href={href}
-        class="text-lg leading-none hover:opacity-80 transition-opacity"
+        class="inline-flex h-6 items-center text-lg leading-none hover:opacity-80 transition-opacity"
         aria-label="English"
         title="English"
       >
@@ -46,7 +49,7 @@ const href = await getHref(targetLocale);
     ) : (
       <a
         href={href}
-        class="text-lg leading-none hover:opacity-80 transition-opacity"
+        class="inline-flex h-6 items-center text-lg leading-none hover:opacity-80 transition-opacity"
         aria-label="Français"
         title="Français"
       >
