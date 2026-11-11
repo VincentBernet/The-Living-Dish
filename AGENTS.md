@@ -1,48 +1,69 @@
+# The Living Dish
+
+This is a bilingual French/English Astro 7 food-history blog. French is the default locale and the source of truth for recipe content. The editorial goal is to use dishes as a way to explain culture, history, technique, and change over time.
+
+## Always-on rules
+
+- Keep changes minimal and scoped to the request.
+- Prefer `.astro` components for static UI. Use React islands only when client-side state or interaction is required.
+- Keep shared application logic in `src/lib/`; use the existing helpers in `src/lib/recipes.ts` for recipe collection queries and locale handling.
+- Keep French and English pages structurally mirrored, changing only locale-specific values and copy.
+- Preserve existing user changes and inspect the diff before finishing.
+
+### Recipe content
+
+- Recipe files live at `src/content/recipes/{locale}/{slug}.mdx`; locales are `fr` and `en`.
+- A French/English pair must share the same `translationKey`.
+- Keep structured recipe data in frontmatter and cultural or historical narrative in the MDX body.
+- French corrections are limited to spelling, grammatical agreement, and verb conjugation. Preserve meaning, punctuation, phrasing, tone, vocabulary, structure, formatting, and line breaks unless a rewrite is explicitly requested.
+- When French recipe content changes, update the corresponding English file to the same meaning, structure, and level of detail. French is the source of truth.
+- In recipe steps, write time units as `s`, `min`, and `h`, with a space and no plural. Use `à` for French ranges and `to` for English ranges. Outside steps, full unit names are allowed when natural.
+- Whenever an existing recipe is updated, set `updatedDate` in both locale files to the current date in `YYYY-MM-DD` format.
+
+## Project map
+
+- Content: `src/content/recipes/{locale}/{slug}.mdx`
+- Content schema: `src/content.config.ts`
+- Pages: `src/pages/{locale}/` with mirrored `fr` and `en` routes
+- Shared recipe helpers: `src/lib/recipes.ts`
+- Components: `src/components/`
+- Layout: `src/layouts/Layout.astro`
+- Theme and global prose styles: `src/styles/global.css`
+
+## Skills
+
+Use the repo-local skills in `.agents/skills/` when their trigger matches:
+
+- `$recipe-content` for creating, editing, correcting, translating, or auditing recipe MDX and its French/English pair.
+- `$new-recipe` for scaffolding a new bilingual recipe from the Lorem Ipsum template with dedicated renamed image assets.
+- `$astro-ui` for Astro pages/components, React islands, routing, layout, Tailwind, or global styling changes.
+- `$project-verification` after source, content, configuration, or build changes to run the repository checks and report failures precisely.
+
 ## Development
+
+Use pnpm, matching the pinned `packageManager` in `package.json`.
 
 When starting the dev server, use background mode:
 
-```
+```sh
 astro dev --background
 ```
 
-Manage the background server with `astro dev stop`, `astro dev status`, and `astro dev logs`.
+Manage it with `astro dev stop`, `astro dev status`, and `astro dev logs`.
 
-## Documentation
+The normal definition of done is:
 
-Full documentation: https://docs.astro.build
+```sh
+pnpm run ci
+```
 
-Consult these guides before working on related tasks:
+## Astro documentation
 
-- [Adding pages, dynamic routes, or middleware](https://docs.astro.build/en/guides/routing/)
-- [Working with Astro components](https://docs.astro.build/en/basics/astro-components/)
-- [Using React, Vue, Svelte, or other framework components](https://docs.astro.build/en/guides/framework-components/)
-- [Adding or managing content](https://docs.astro.build/en/guides/content-collections/)
-- [Adding styles or using Tailwind](https://docs.astro.build/en/guides/styling/)
-- [Supporting multiple languages](https://docs.astro.build/en/guides/internationalization/)
+Consult the relevant official guide before routing, component, framework, content, styling, or internationalization changes:
 
-## Orthographe
-
-When asked to correct French recipe content, only fix spelling, grammatical agreement, and verb conjugation errors.
-Never change the meaning, punctuation, phrasing, tone, vocabulary, or writing style.
-Preserve the original structure, formatting, and line breaks whenever possible. Do not rewrite sentences unless explicitly requested.
-
-## Traductions
-
-The French version is the source of truth for recipe content. Whenever the French version is updated, update the corresponding English version to match it. Keep the same meaning, structure, and level of detail in both languages.
-
-## Time Measurements
-
-In recipe steps, always abbreviate time units:
-
-- Seconds: s (e.g., 30 s)
-- Minutes: min (e.g., 5 min)
-- Hours: h (e.g., 1 h)
-
-Use a space between the number and the unit. Never pluralize unit abbreviations.
-Write time ranges using à in French (e.g., 4 à 5 min) and to in English (e.g., 4 to 5 min).
-Outside recipe steps, time units may be written in full (secondes, minutes, seconds, minutes) when more natural in prose.
-
-## Recipe Updates
-
-Whenever a recipe is updated, set its `updatedDate` field to the current date in `YYYY-MM-DD` format. Update the corresponding French and English recipe files together.
+- https://docs.astro.build/en/guides/routing/
+- https://docs.astro.build/en/basics/astro-components/
+- https://docs.astro.build/en/guides/framework-components/
+- https://docs.astro.build/en/guides/content-collections/
+- https://docs.astro.build/en/guides/styling/
+- https://docs.astro.build/en/guides/internationalization/

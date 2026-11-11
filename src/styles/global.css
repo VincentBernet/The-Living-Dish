@@ -27,24 +27,31 @@
   src: url("../assets/fonts/SourceSerif4-Variable-Latin.woff2") format("woff2");
 }
 
-@theme {
+@theme inline {
   /** --font-sans => Use Inter for body text **/
   --font-sans: "Inter", system-ui, sans-serif;
   /** --font-serif => Use Source Serif 4 for titles **/
   --font-serif: "Source Serif 4", Georgia, serif;
   --font-handwriting: "Caveat", cursive;
-  --color-cream: #faf7f2;
-  --color-warm-50: #fdf8f3;
-  --color-warm-100: #f5ebe0;
-  --color-warm-200: #e8d5c4;
-  --color-warm-800: #3d2c1e;
-  --color-warm-900: #2a1f15;
-  --color-accent: #c45c26;
-  --color-accent-dark: #a34a1e;
+  --color-cream: var(--ds-color-cream);
+  --color-warm-50: var(--ds-color-warm50);
+  --color-warm-100: var(--ds-color-warm100);
+  --color-warm-200: var(--ds-color-warm200);
+  --color-warm-800: var(--ds-color-warm800);
+  --color-warm-900: var(--ds-color-warm900);
+  --color-accent: var(--ds-color-accent);
+  --color-accent-dark: var(--ds-color-accentDark);
+  --color-selection: var(--ds-color-selection);
+  --color-selection-text: var(--ds-color-selectionText);
 }
 
 body {
   @apply bg-cream text-warm-900 font-sans antialiased;
+}
+
+::selection {
+  background: var(--ds-color-selection);
+  color: var(--ds-color-selectionText);
 }
 
 html {
@@ -73,7 +80,7 @@ html {
   align-items: center;
   justify-content: center;
   padding: 1rem;
-  background: rgb(42 31 21 / 84%);
+  background: var(--ds-color-lightboxOverlay);
 }
 
 .recipe-lightbox-image {
@@ -83,7 +90,7 @@ html {
   cursor: zoom-out;
   object-fit: contain;
   border-radius: 0.5rem;
-  box-shadow: 0 20px 50px rgb(0 0 0 / 35%);
+  box-shadow: 0 20px 50px var(--ds-color-shadow);
   transition: opacity 200ms ease-out;
 }
 
@@ -136,7 +143,7 @@ html.js-enabled .recipe-card-image.is-loaded {
 
 .recipe-handwritten-note.recipe-handwritten-note-black,
 .recipe-handwritten-note.recipe-handwritten-note-black a {
-  color: #000;
+  color: var(--ds-color-black);
 }
 
 .recipe-handwritten-note.recipe-handwritten-note-with-stamp {
