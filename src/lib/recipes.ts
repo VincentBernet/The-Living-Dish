@@ -11,6 +11,7 @@ export function getSlugFromId(id: string): string {
 }
 
 function isAvailableRecipe(recipe: CollectionEntry<"recipes">) {
+  if (recipe.data.translationKey === "lorem-ipsum-recipe") return false;
   return import.meta.env.PROD ? !recipe.data.draft : true;
 }
 
