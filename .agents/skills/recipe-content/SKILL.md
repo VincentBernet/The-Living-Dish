@@ -7,7 +7,7 @@ description: Maintain bilingual recipe content in this Astro blog. Use when crea
 
 ## Source of truth
 
-French is authoritative. The matching English file must express the same meaning, structure, and level of detail. Recipe pairs share a `translationKey` and normally live under the same slug, but confirm the actual pair from frontmatter and the collection layout before editing.
+French is authoritative. The matching English file must express the same meaning, structure, and level of detail. Recipe pairs use localized slugs and share a `translationKey`; resolve the actual pair from frontmatter before editing.
 
 ## Steps
 
@@ -21,7 +21,7 @@ French is authoritative. The matching English file must express the same meaning
 
 ## New recipes
 
-Create both locale files, use the same `translationKey`, and keep the slug and collection layout consistent with existing recipes. No page change is needed for a normal recipe because the existing dynamic routes generate recipe paths from the collection.
+Use `$new-recipe` to scaffold from French and English names. Create each locale file at its localized slug and use the French slug as the shared `translationKey` and image directory. No page change is needed for a normal recipe because the existing dynamic routes generate recipe paths from the collection.
 
 ## Completion criteria
 

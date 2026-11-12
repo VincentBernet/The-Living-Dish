@@ -62,7 +62,8 @@ def main() -> None:
     parser = argparse.ArgumentParser(
         description="Scaffold a bilingual recipe from lorem-ipsum-recipe."
     )
-    parser.add_argument("name", help="Recipe name or lowercase kebab-case slug")
+    parser.add_argument("fr_name", help="French recipe name or lowercase kebab-case slug")
+    parser.add_argument("en_name", help="English recipe name or lowercase kebab-case slug")
     parser.add_argument(
         "--date",
         default=date.today().isoformat(),
@@ -76,8 +77,13 @@ def main() -> None:
         raise SystemExit("--date must use YYYY-MM-DD format") from error
 
     root = Path.cwd()
-    slug = slugify(args.name)
-    name = display_name(args.name, slug)
+    input_names = {"fr": args.fr_name, "en": args.en_name}
+    slugs = {locale: slugify(name) for locale, name in input_names.items()}
+    names = {
+        locale: display_name(name, slugs[locale])
+        for locale, name in input_names.items()
+    }
+    shared_slug = slugs["fr"]
 
     template_recipe_dir = root / "src/content/recipes"
     template_image_dir = root / "public/images/recipes" / TEMPLATE_SLUG
@@ -86,13 +92,13 @@ def main() -> None:
         for locale in ("fr", "en")
     }
     target_files = {
-        locale: template_recipe_dir / locale / f"{slug}.mdx"
+        locale: template_recipe_dir / locale / f"{slugs[locale]}.mdx"
         for locale in ("fr", "en")
     }
-    target_image_dir = root / "public/images/recipes" / slug
+    target_image_dir = root / "public/images/recipes" / shared_slug
 
-    if slug == TEMPLATE_SLUG:
-        raise SystemExit("Choose a name other than lorem-ipsum-recipe.")
+    if TEMPLATE_SLUG in slugs.values():
+        raise SystemExit("Choose recipe names other than lorem-ipsum-recipe.")
     for source in (*source_files.values(), template_image_dir):
         if not source.exists():
             raise SystemExit(f"Template path is missing: {source}")
@@ -103,14 +109,17 @@ def main() -> None:
         target_files[locale].parent.mkdir(parents=True, exist_ok=True)
         content = source.read_text(encoding="utf-8")
         target_files[locale].write_text(
-            replace_template_values(content, slug, name, args.date),
+            replace_template_values(content, shared_slug, names[locale], args.date),
             encoding="utf-8",
         )
 
     for source in template_image_dir.rglob("*"):
         if not source.is_file():
             continue
-        relative_parts = [part.replace(TEMPLATE_SLUG, slug) for part in source.relative_to(template_image_dir).parts]
+        relative_parts = [
+            part.replace(TEMPLATE_SLUG, shared_slug)
+            for part in source.relative_to(template_image_dir).parts
+        ]
         target = target_image_dir.joinpath(*relative_parts)
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(source, target)
