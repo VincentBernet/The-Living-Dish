@@ -17,7 +17,8 @@
     "lint:fix": "eslint . --fix",
     "prettier": "prettier --check .",
     "prettier:fix": "prettier --write .",
-    "ci": "pnpm run lint && pnpm run prettier && pnpm run tsc && pnpm run build",
+    "test": "node --test tests/*.test.mjs",
+    "ci": "pnpm run lint && pnpm run prettier && pnpm run tsc && pnpm run build && pnpm run test",
     "prepare": "husky"
   },
   "dependencies": {

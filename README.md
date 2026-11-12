@@ -16,3 +16,26 @@ Feature :
 
 - Click on image to zoom on it
 - Link with asteric redirect to the given asteric explanation
+
+## Recipe language redirects
+
+When a recipe slug belongs to the other language, the site resolves its
+`translationKey` and redirects to the counterpart in the requested language. For
+example, `/en/recipes/huile-pimente/` redirects to
+`/en/recipes/chili-crisp-oil/` with HTTP 301. Existing canonical routes take
+priority; unknown recipes and missing translations retain their 404 behavior.
+
+`src/lib/recipes.ts` generates the redirects from available collection entries.
+Astro middleware applies them in local development, preserving query parameters.
+The dynamic endpoint `src/pages/[redirects].ts` builds `dist/_redirects`, which
+Netlify reads when deploying the existing static output. Netlify sends the HTTP
+301 response and forwards query parameters automatically. Static Astro middleware
+does not run per request on Netlify, so the generated file must be deployed with
+`dist`. Drafts are available locally and excluded from production redirects; the
+Lorem Ipsum template is always excluded.
+
+Run `pnpm run test` to validate redirects, canonical URLs, 404 responses, query
+parameters, and SEO metadata. The tests build and serve an isolated temporary copy
+of the site with extra translation fixtures, then stop its background Astro dev
+server and remove the copy. They need permission to bind a localhost port.
+`pnpm run ci` runs these tests after the existing checks and build.

@@ -38,3 +38,29 @@ export async function getAlternateRecipe(
       getLocaleFromId(entry.id) === targetLocale,
   );
 }
+
+export async function getRecipeRedirects() {
+  const recipes = await getCollection("recipes", isAvailableRecipe);
+  const canonicalIds = new Set(recipes.map((recipe) => recipe.id));
+  const redirects = new Map<string, string>();
+
+  for (const recipe of recipes) {
+    const locale = getLocaleFromId(recipe.id) === "fr" ? "en" : "fr";
+    const slug = getSlugFromId(recipe.id);
+    if (canonicalIds.has(`${locale}/${slug}`)) continue;
+
+    const counterpart = recipes.find(
+      (entry) =>
+        getLocaleFromId(entry.id) === locale &&
+        entry.data.translationKey === recipe.data.translationKey,
+    );
+    if (counterpart) {
+      redirects.set(
+        `/${locale}/recipes/${slug}`,
+        `/${locale}/recipes/${getSlugFromId(counterpart.id)}/`,
+      );
+    }
+  }
+
+  return redirects;
+}
