@@ -17,6 +17,7 @@ This is a bilingual French/English Astro 7 food-history blog. French is the defa
 - Keep structured recipe data in frontmatter and cultural or historical narrative in the MDX body.
 - French corrections are limited to spelling, grammatical agreement, and verb conjugation. Preserve meaning, punctuation, phrasing, tone, vocabulary, structure, formatting, and line breaks unless a rewrite is explicitly requested.
 - When French recipe content changes, update the corresponding English file to the same meaning, structure, and level of detail. French is the source of truth.
+- Write French recipe `steps` in the second-person plural imperative with implicit vouvoiement: « Épluchez l'oignon », « Faites chauffer l'huile », « Versez le fumet ». Keep instructions direct and omit the explicit pronoun « vous » whenever possible.
 - In recipe steps, write time units as `s`, `min`, and `h`, with a space and no plural. Use `à` for French ranges and `to` for English ranges. Outside steps, full unit names are allowed when natural.
 - Whenever an existing recipe is updated, set `updatedDate` in both locale files to the current date in `YYYY-MM-DD` format.
 
