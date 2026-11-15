@@ -115,7 +115,7 @@ export default function ServingsScaler({
                   {ingredientLabel}
                   {ingredient.footnoteId && (
                     <a
-                      id={`footnote-ref-${ingredient.footnoteId}`}
+                      id={`footnote-ref-${ingredient.footnoteId}${ingredients.findIndex((item) => item.footnoteId === ingredient.footnoteId) === index ? "" : `-${index}`}`}
                       href={`#footnote-${ingredient.footnoteId}`}
                       className="recipe-footnote-reference"
                       aria-label={`${ingredientLabel}, ${labels[locale].seeNote}`}

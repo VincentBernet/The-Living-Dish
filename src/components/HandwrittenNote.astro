@@ -5,23 +5,36 @@ interface NotePart {
 }
 
 interface Props {
+  id?: string;
   parts: NotePart[];
 }
 
-const { parts } = Astro.props;
+const { id, parts } = Astro.props;
 ---
 
 <aside
+  id={id}
   class="recipe-handwritten-note recipe-handwritten-note-black font-handwriting"
   role="note"
+  tabindex={id ? "-1" : undefined}
 >
   <span>
     {
       parts.map((part) =>
         part.href ? (
-          <a class="underline underline-offset-2" href={part.href}>
-            {part.text}
-          </a>
+          <>
+            <a
+              class={
+                part.text === "*"
+                  ? "recipe-footnote-marker-link"
+                  : "underline underline-offset-2"
+              }
+              href={part.href}
+            >
+              {part.text}
+            </a>
+            {part.text === "*" ? " " : ""}
+          </>
         ) : (
           part.text
         ),

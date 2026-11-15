@@ -41,6 +41,7 @@ const alternatePaths = alternates ?? { [locale]: Astro.url.pathname };
       ))
     }
     <meta name="generator" content={Astro.generator} />
+    <script src="../lib/footnotes.ts"></script>
     <script is:inline>
       document.documentElement.classList.add("js-enabled");
 

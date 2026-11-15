@@ -4,6 +4,7 @@ interface Props {
   label: string;
   marker?: string;
   ariaLabel?: string;
+  referenceId?: string;
 }
 
 const {
@@ -11,16 +12,16 @@ const {
   label,
   marker = "*",
   ariaLabel = `${label}, voir la note`,
+  referenceId = `footnote-ref-${id}`,
 } = Astro.props;
-const referenceId = `footnote-ref-${id}`;
 const noteId = `footnote-${id}`;
 ---
 
-<a
+{label}<a
   id={referenceId}
   href={`#${noteId}`}
   class="recipe-footnote-reference"
   aria-label={ariaLabel}
 >
-  {label}{marker}
+  {marker}
 </a>

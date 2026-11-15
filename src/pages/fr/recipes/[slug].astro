@@ -128,7 +128,10 @@ const updatedDate = dateFormatter.format(
         />
         {
           recipe.data.stepsNote && (
-            <HandwrittenNote parts={recipe.data.stepsNote} />
+            <HandwrittenNote
+              id="recipe-steps-note"
+              parts={recipe.data.stepsNote}
+            />
           )
         }
       </section>

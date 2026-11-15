@@ -5,6 +5,7 @@ import {
   mkdtemp,
   readFile,
   readdir,
+  realpath,
   rm,
   symlink,
   writeFile,
@@ -51,7 +52,9 @@ async function availablePort() {
 
 before(
   async () => {
-    root = await mkdtemp(path.join(tmpdir(), "living-dish-redirects-"));
+    root = await realpath(
+      await mkdtemp(path.join(tmpdir(), "living-dish-redirects-")),
+    );
     await cp(path.join(project, "src"), path.join(root, "src"), {
       recursive: true,
     });
@@ -254,4 +257,41 @@ test("canonical tags, hreflang, and sitemaps contain only canonical URLs", async
       );
     }
   }
+});
+
+test("footnote links contain only asterisks and resolve to unique destinations", async () => {
+  let checked = 0;
+  for (const recipe of recipes) {
+    const response = await request(recipe.path);
+    const html = await response.text();
+    const anchors = [...html.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/g)];
+    const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map((match) => match[1]);
+    for (const [, attributes, content] of anchors) {
+      if (
+        !/class="[^"]*recipe-footnote-(?:reference|marker-link)/.test(
+          attributes,
+        )
+      )
+        continue;
+      assert.equal(content.replace(/<[^>]+>/g, "").trim(), "*", recipe.path);
+      const destination = attributes.match(/href="#([^"]+)"/)?.[1];
+      assert.ok(destination, recipe.path);
+      assert.equal(
+        ids.filter((id) => id === destination).length,
+        1,
+        `${recipe.path} -> ${destination}`,
+      );
+      if (attributes.includes("recipe-footnote-reference")) {
+        const reference = attributes.match(/\bid="([^"]+)"/)?.[1];
+        assert.ok(reference, recipe.path);
+        assert.equal(
+          ids.filter((id) => id === reference).length,
+          1,
+          `${recipe.path}: ${reference}`,
+        );
+      }
+      checked++;
+    }
+  }
+  assert.ok(checked > 0);
 });
