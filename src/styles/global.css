@@ -98,6 +98,41 @@ html {
   opacity: 1;
 }
 
+.recipe-lightbox-control {
+  @apply absolute z-10 grid h-11 w-11 place-items-center rounded-full border border-warm-200 bg-warm-900 text-cream;
+  font-size: 1.75rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.recipe-lightbox-control:focus-visible {
+  outline: 2px solid var(--ds-color-cream);
+  outline-offset: 4px;
+}
+
+.recipe-lightbox-control:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.recipe-lightbox-control[hidden] {
+  display: none;
+}
+
+.recipe-lightbox-previous,
+.recipe-lightbox-next {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.recipe-lightbox-previous {
+  left: 0.75rem;
+}
+
+.recipe-lightbox-next {
+  right: 0.75rem;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .recipe-lightbox-image {
     transition: none;
