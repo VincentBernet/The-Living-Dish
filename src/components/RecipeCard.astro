@@ -2,6 +2,7 @@
 import type { CollectionEntry } from "astro:content";
 import type { Locale } from "../lib/recipes";
 import { getSlugFromId } from "../lib/recipes";
+import { getServingsUnit } from "../lib/servings";
 import RecipeCardMedia from "./RecipeCardMedia.astro";
 
 interface Props {
@@ -37,7 +38,13 @@ const difficultyLabels = {
       <span>&middot;</span>
       <span>
         {recipe.data.servings}{" "}
-        {locale === "fr" ? "portions" : "servings"}
+        {
+          getServingsUnit(
+            recipe.data.servings,
+            locale,
+            recipe.data.servingsUnit,
+          )
+        }
       </span>
       <span>&middot;</span>
       <span>{difficultyLabels[locale][recipe.data.difficulty]}</span>

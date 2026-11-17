@@ -11,6 +11,12 @@ const recipeSchema = z.object({
   prepTime: z.number(),
   cookTime: z.number(),
   servings: z.number(),
+  servingsUnit: z
+    .object({
+      singular: z.string().trim().min(1),
+      plural: z.string().trim().min(1),
+    })
+    .optional(),
   difficulty: z.enum(["easy", "medium", "hard"]),
   tags: z.array(z.string()).default([]),
   image: z.string().optional(),

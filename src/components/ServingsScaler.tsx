@@ -1,4 +1,6 @@
 import { useState } from "react";
+import type { Locale } from "../lib/recipes";
+import { getServingsUnit, type ServingsUnit } from "../lib/servings";
 
 export interface Ingredient {
   quantity?: number;
@@ -10,7 +12,8 @@ export interface Ingredient {
 interface Props {
   ingredients: Ingredient[];
   baseServings: number;
-  locale: "fr" | "en";
+  servingsUnit?: ServingsUnit;
+  locale: Locale;
   title: string;
   ingredientsImage?: string;
   ingredientsImageOrientation?: "horizontal" | "vertical";
@@ -37,6 +40,7 @@ function formatIngredient(ingredient: Ingredient, multiplier: number): string {
 export default function ServingsScaler({
   ingredients,
   baseServings,
+  servingsUnit,
   locale,
   title,
   ingredientsImage,
@@ -45,16 +49,15 @@ export default function ServingsScaler({
 }: Props) {
   const [servings, setServings] = useState(baseServings);
   const multiplier = servings / baseServings;
+  const unitLabel = getServingsUnit(servings, locale, servingsUnit);
 
   const labels = {
     fr: {
-      servings: "Portions",
       decrease: "Diminuer",
       increase: "Augmenter",
       seeNote: "Voir la note",
     },
     en: {
-      servings: "Servings",
       decrease: "Decrease",
       increase: "Increase",
       seeNote: "See note",
@@ -70,7 +73,7 @@ export default function ServingsScaler({
             htmlFor="servings"
             className="text-sm font-medium text-warm-800"
           >
-            {labels[locale].servings}
+            {unitLabel.charAt(0).toUpperCase() + unitLabel.slice(1)}
           </label>
           <button
             type="button"
