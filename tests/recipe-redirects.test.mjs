@@ -21,15 +21,16 @@ const run = promisify(execFile);
 const project = fileURLToPath(new URL("../", import.meta.url));
 const cli = path.join(project, "node_modules/astro/bin/astro.mjs");
 const site = "https://thelivingdish.com";
+const excludedTranslationKeys = ["lorem-ipsum-recipe", "bolognese-sauce"];
 const pairs = [
   ["huile-pimente", "chili-crisp-oil"],
   ["nouille-dandan", "dan-dan-noodles"],
   ["pickles-oignon-rouge", "pickled-red-onions"],
-  ["sauce-bolognaise", "ragu-alla-bolognese"],
 ];
 let root;
 let origin;
 let recipes;
+let excludedRecipes;
 
 function astro(...args) {
   return run(process.execPath, [cli, ...args, "--root", root], {
@@ -96,13 +97,16 @@ before(
     }
 
     recipes = [];
+    excludedRecipes = [];
     for (const locale of ["fr", "en"]) {
       const directory = path.join(root, `src/content/recipes/${locale}`);
       for (const file of await readdir(directory)) {
         const content = await readFile(path.join(directory, file), "utf8");
         const key = content.match(/^translationKey: (.+)$/m)[1];
-        if (key === "lorem-ipsum-recipe") continue;
-        recipes.push({
+        const collection = excludedTranslationKeys.includes(key)
+          ? excludedRecipes
+          : recipes;
+        collection.push({
           locale,
           key,
           path: `/${locale}/recipes/${file.replace(/\.mdx$/, "")}/`,
@@ -171,17 +175,30 @@ test("canonical recipe URLs return 200 directly, including colliding slugs", asy
   }
 });
 
-test("unknown slugs, missing translations, and hidden templates return 404", async () => {
+test("unknown slugs and missing translations return 404", async () => {
   for (const locale of ["fr", "en"]) {
     const other = locale === "fr" ? "en" : "fr";
-    for (const slug of [
-      "unknown-recipe",
-      `only-${other}`,
-      "lorem-ipsum-recipe",
-    ]) {
+    for (const slug of ["unknown-recipe", `only-${other}`]) {
       const response = await request(`/${locale}/recipes/${slug}/?from=test`);
       assert.equal(response.status, 404, `${locale}/${slug}`);
       assert.equal(response.headers.get("location"), null);
+    }
+  }
+});
+
+test("excluded recipes and their cross-locale URLs return 404 locally", async () => {
+  assert.deepEqual(
+    new Set(excludedRecipes.map((recipe) => recipe.key)),
+    new Set(excludedTranslationKeys),
+  );
+  for (const recipe of excludedRecipes) {
+    for (const locale of ["fr", "en"]) {
+      const url = recipe.path.replace(`/${recipe.locale}/`, `/${locale}/`);
+      for (const pathname of [url, url.replace(/\/$/, "")]) {
+        const response = await request(`${pathname}?from=test`);
+        assert.equal(response.status, 404, pathname);
+        assert.equal(response.headers.get("location"), null);
+      }
     }
   }
 });
