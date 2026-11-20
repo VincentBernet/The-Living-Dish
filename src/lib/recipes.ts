@@ -10,8 +10,10 @@ export function getSlugFromId(id: string): string {
   return id.split("/").slice(1).join("/");
 }
 
+const RECIPE_TO_HIDE_LIST = ["lorem-ipsum-recipe", "bolognese-sauce"];
+
 function isAvailableRecipe(recipe: CollectionEntry<"recipes">) {
-  if (recipe.data.translationKey === "lorem-ipsum-recipe") return false;
+  if (RECIPE_TO_HIDE_LIST.includes(recipe.data.translationKey)) return false;
   return import.meta.env.PROD ? !recipe.data.draft : true;
 }
 
