@@ -50,6 +50,8 @@ const alternatePaths = alternates ?? { [locale]: Astro.url.pathname };
         document
           .querySelectorAll(".recipe-page img, .recipe-card-image")
           .forEach((image) => {
+            if (image.hasAttribute("data-react-image")) return;
+
             const revealImage = () => image.classList.add("is-loaded");
 
             if (image.complete) {

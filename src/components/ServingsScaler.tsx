@@ -29,6 +29,7 @@ export default function ServingsScaler({
   imageAlt,
 }: Props) {
   const [servings, setServings] = useState(baseServings);
+  const [imageLoaded, setImageLoaded] = useState(false);
   const [measurementSystem, setMeasurementSystem] =
     useState<MeasurementSystem>("metric");
   const multiplier = servings / baseServings;
@@ -147,13 +148,19 @@ export default function ServingsScaler({
 
       {ingredientsImage && (
         <img
+          data-react-image
+          ref={(image) => {
+            if (image?.complete) setImageLoaded(true);
+          }}
           src={ingredientsImage}
           alt={imageAlt}
-          className={
+          onLoad={() => setImageLoaded(true)}
+          onError={() => setImageLoaded(true)}
+          className={`${
             ingredientsImageOrientation === "vertical"
               ? "aspect-[3/4] w-full rounded-lg object-cover md:self-center"
               : "aspect-[4/3] w-full rounded-lg object-cover md:self-center"
-          }
+          }${imageLoaded ? " is-loaded" : ""}`}
         />
       )}
     </div>
